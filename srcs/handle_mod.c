@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 19:17:25 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/18 00:14:46 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/05/18 00:28:04 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,8 @@ size_t		diouflag(uintmax_t nb, t_modif *modi, size_t neg, char *base)
 		nblen = ft_strlen(itoa_base(nb, base));
 		if (neg == 0 && (modi->plus || modi->space))
 			len += handflag(modi);
-		if (neg && !negok && (modi->plus || modi->space))
-		{
+		if (neg && !negok && (modi->plus || modi->space) && (negok = 1) == 1)
 			len += get_charlen('-');
-			negok = 1;
-		}
 		if (modi->minus > 0)
 			ft_putnbr_base(nb, base);
 		if (modi->zero)
