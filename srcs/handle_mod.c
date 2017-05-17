@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_mod.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 19:17:25 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/17 18:36:39 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/18 00:14:46 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ size_t		diouflag(uintmax_t nb, t_modif *modi, size_t neg, char *base)
 			len += get_charlen('-');
 			negok = 1;
 		}
-		if (modi->minus)
+		if (modi->minus > 0)
 			ft_putnbr_base(nb, base);
 		if (modi->zero)
 			len += flagzero(modi, neg, nblen, negok);
 		if (modi->minus || modi->period || modi->digit)
 			len += handle_mod(modi, neg, nblen);
-		if (!modi->minus)
+		if (modi->minus == 0)
 			ft_putnbr_base(nb, base);
 	}
 	return (len);

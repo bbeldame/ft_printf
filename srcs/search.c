@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 17:05:55 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/15 17:14:14 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/18 00:22:34 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void		search_mod(const char *format, int i, t_modif *modi)
 
 void		search_flag(const char *format, int i, t_modif *modi)
 {
+	init_all(modi);
 	modi->flag = 0;
 	while (format[i] == '#' || format[i] == '0' || format[i] == '-' ||
 			format[i] == '+' || format[i] == ' ')

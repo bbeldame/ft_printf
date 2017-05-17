@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 17:33:44 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/17 22:36:43 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/05/18 00:13:48 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int		main()
 	wchar_t *wstr = L"おはよう";
 	char	c = 'A';
 
-	r = printf("%15d\n", 42);
-	printf("real = %d\n", r);
-	m = ft_printf("%15d\n", 42);
-	printf("my = %d\n", m);
+	r = printf("%4.15d", 42);
+	printf("\nreal = %d\n", r);
+	m = ft_printf("%4.15d", 42);
+	printf("\nmy = %d\n", m);
 //	r = printf("%.4d\n", 42);
 //	printf("real = %d\n", r);
 //	m = ft_printf("%.4d\n", 42);

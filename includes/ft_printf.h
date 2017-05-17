@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:54:10 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/17 22:31:28 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/05/18 00:24:34 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,4 +107,6 @@ int				ft_putwchar16(unsigned int mask2,
 		unsigned char octet, wchar_t value);
 int				ft_putwchar32(unsigned int mask3,
 		unsigned char octet, wchar_t value);
+void			init_all(t_modif *modi);
+
 #endif
