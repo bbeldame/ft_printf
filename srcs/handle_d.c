@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_d.c                                      :+:      :+:    :+:   */
+/*   handle_d.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 19:56:57 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/01 21:46:11 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/17 22:52:04 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ size_t			handle_d(va_list argl, t_modif *modi)
 			return (len);
 		if (neg && nb != LONG_MIN)
 			len += get_charlen('-');
-		ft_putnbr(nb);
+		ft_putllnbr(nb);
 	}
 	len += ft_strlen(ft_itoa(nb));
 	return (len);
@@ -45,7 +45,11 @@ size_t			handflag(t_modif *modi)
 	size_t			len;
 
 	len = 0;
-	len += (modi->plus) ? get_charlen('+') : 0;
-	len += (modi->space) ? get_charlen(' ') : 0;
+	if (modi->plus == 1 && modi->space == 1)
+		modi->space = 0;
+	if (modi->plus == 1)
+		len += get_charlen('+');
+	if (modi->space == 1)
+		len += get_charlen(' ');
 	return (len);
 }

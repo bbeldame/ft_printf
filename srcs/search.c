@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 17:05:55 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/01 21:42:01 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/15 17:14:14 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ void		search_flag(const char *format, int i, t_modif *modi)
 		else if (format[i] == '+')
 			modi->plus = 1;
 		else if (format[i] == ' ')
+		{
 			modi->space = 1;
+		}
 		i++;
 		modi->flag++;
 	}

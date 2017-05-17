@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bbeldame <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/12 18:06:34 by bbeldame          #+#    #+#              #
-#    Updated: 2016/11/14 21:31:52 by bbeldame         ###   ########.fr        #
+#    Updated: 2017/05/17 22:47:15 by bbeldame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,18 +86,24 @@ SRCS =	ft_putchar.c \
 
 OBJS =	$(SRCS:.c=.o)
 
+GREEN = \033[0;32m
+RED = \033[0;31m
+NC = \033[0m
+
 all: 	$(NAME)
 
 $(NAME):
 	@$(CC) $(CFLAGS) $(SRCS)
 	@$(LIB) $(NAME) $(OBJS)
 	@$(RLIB) $(NAME)
+	@echo "$(GREEN)----------Libft compiled----------$(NC)"
 
 clean:
 	@/bin/rm -f $(OBJS)
 
 fclean:	clean
 	@/bin/rm -f $(NAME)
+	@echo "$(GREEN)-----Libft removed completely-----$(NC)"
 
 re: fclean all
 

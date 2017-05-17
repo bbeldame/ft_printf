@@ -6,7 +6,7 @@
 #    By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/17 19:49:45 by msakwins          #+#    #+#              #
-#    Updated: 2017/05/17 22:27:06 by bbeldame         ###   ########.fr        #
+#    Updated: 2017/05/17 22:48:02 by bbeldame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,31 +42,33 @@ SRC_NAME = search.c \
 	lenght_mod.c \
 	handle_mod.c
 
-#SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
-
 SRCS = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJS = $(addprefix $(OBJ_PATH)/,$(SRC_NAME:.c=.o))
+
+GREEN = \033[0;32m
+RED = \033[0;31m
+NC = \033[0m
 
 all: $(NAME)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
-	mkdir -p $(OBJ_PATH)
-	echo "cc"
-	gcc $(FLAGS) -I $(INC) -o $@ -c $<
+	@mkdir -p $(OBJ_PATH)
+	@gcc $(FLAGS) -I $(INC) -o $@ -c $<
 
 $(NAME): $(OBJS)
-	echo "slt"
-	make -C $(LIBFT_PATH)
-	cp $(LIBFT) ./$(NAME)
-	ar rc $(NAME) $(OBJS)
-	ranlib $(NAME)
+	@make -C $(LIBFT_PATH)
+	@cp $(LIBFT) ./$(NAME)
+	@ar rc $(NAME) $(OBJS)
+	@ranlib $(NAME)
+	@echo "$(GREEN)--------ft_printf compiled--------$(NC)"
 
 clean:
-	make clean -C $(LIBFT_PATH)
-	/bin/rm -rf $(OBJ_PATH)
+	@make clean -C $(LIBFT_PATH)
+	@/bin/rm -rf $(OBJ_PATH)
 
 fclean: clean
-	make fclean -C $(LIBFT_PATH)
-	/bin/rm -rf $(NAME)
+	@make fclean -C $(LIBFT_PATH)
+	@/bin/rm -rf $(NAME)
+	@echo "$(GREEN)---ft_printf removed completely---$(NC)"
 
 re: fclean all

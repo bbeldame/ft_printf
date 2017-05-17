@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 19:17:25 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/01 21:45:47 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/17 18:36:39 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,25 @@ size_t		diouflag(uintmax_t nb, t_modif *modi, size_t neg, char *base)
 {
 	size_t		len;
 	size_t		nblen;
+	size_t		negok;
 
 	len = 0;
+	negok = 0;
 	if (modi->flag || modi->preci || modi->digit)
 	{
 		nblen = ft_strlen(itoa_base(nb, base));
 		if (neg == 0 && (modi->plus || modi->space))
 			len += handflag(modi);
-		if (neg && modi->plus)
+		if (neg && !negok && (modi->plus || modi->space))
+		{
 			len += get_charlen('-');
+			negok = 1;
+		}
 		if (modi->minus)
 			ft_putnbr_base(nb, base);
-		if (modi->zero || modi->minus || modi->period || modi->digit)
+		if (modi->zero)
+			len += flagzero(modi, neg, nblen, negok);
+		if (modi->minus || modi->period || modi->digit)
 			len += handle_mod(modi, neg, nblen);
 		if (!modi->minus)
 			ft_putnbr_base(nb, base);
@@ -48,8 +55,6 @@ size_t		handle_mod(t_modif *modi, size_t neg, size_t nblen)
 		modi->digit -= neg;
 	else if (modi->period > modi->digit && modi->digit)
 		modi->digit = 0;
-	if (modi->zero)
-		len += flagzero(modi, neg, nblen, negok);
 	if ((modi->digit && modi->digit - nblen > nblen)
 			|| (modi->preci && modi->period > nblen))
 		len += digitorpreci(modi, neg, nblen, negok);

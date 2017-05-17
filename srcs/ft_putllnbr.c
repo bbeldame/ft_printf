@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 16:09:29 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/17 22:32:03 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/05/17 22:52:01 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void		ft_putllnbr(intmax_t nb)
 	else if (nb < 0)
 	{
 		ft_putchar('-');
-		ft_putnbr(-nb);
+		ft_putllnbr(-nb);
 	}
 	else if (nb >= 10)
 	{
-		ft_putnbr(nb / 10);
-		ft_putnbr(nb % 10);
+		ft_putllnbr(nb / 10);
+		ft_putllnbr(nb % 10);
 	}
 	else
 	{
