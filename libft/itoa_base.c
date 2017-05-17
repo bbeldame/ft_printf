@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   itoa_base.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 18:37:12 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/01 19:11:25 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/17 23:15:33 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
 static int		conv_ex(uintmax_t nb)
 {

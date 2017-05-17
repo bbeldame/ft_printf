@@ -6,7 +6,7 @@
 #    By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/12 18:06:34 by bbeldame          #+#    #+#              #
-#    Updated: 2017/05/17 22:47:15 by bbeldame         ###   ########.fr        #
+#    Updated: 2017/05/17 23:15:25 by bbeldame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,6 +83,8 @@ SRCS =	ft_putchar.c \
 		ft_min.c \
 		ft_strrev.c \
 		ft_recursive_power.c \
+		ft_putnbr_base.c \
+		itoa_base.c \
 
 OBJS =	$(SRCS:.c=.o)
 

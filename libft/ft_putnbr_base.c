@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 17:35:04 by msakwins          #+#    #+#             */
-/*   Updated: 2017/04/01 17:45:29 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/17 23:12:05 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-void	putnbr_base(uintmax_t nb, char *base)
+void	ft_putnbr_base(uintmax_t nb, char *base)
 {
 	if (nb >= ft_strlen(base))
 	{
-		putnbr_base(nb / ft_strlen(base), base);
-		putnbr_base(nb % ft_strlen(base), base);
+		ft_putnbr_base(nb / ft_strlen(base), base);
+		ft_putnbr_base(nb % ft_strlen(base), base);
 	}
 	else
 	{

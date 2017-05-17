@@ -6,7 +6,7 @@
 #    By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/17 19:49:45 by msakwins          #+#    #+#              #
-#    Updated: 2017/05/17 22:48:02 by bbeldame         ###   ########.fr        #
+#    Updated: 2017/05/17 23:15:13 by bbeldame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,6 @@ SRC_NAME = search.c \
 	ft_putllnbr.c \
 	ft_printf.c \
 	ft_putnstr.c \
-	putnbr_base.c \
-	itoa_base.c \
 	get_intlen.c \
 	handle_s.c \
 	handle_d.c \
