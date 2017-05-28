@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 19:17:25 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/28 19:23:44 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/05/28 20:13:57 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ size_t		flagzero(t_modif *modi, size_t neg, size_t nblen, size_t negok)
 		{
 			len += get_charlen('-');
 			negok = 1;
+			modi->digit -= 1;
 		}
 		len += padding(nblen, modi->digit - modi->plus, '0');
 		modi->digit = 0;
@@ -98,6 +99,8 @@ size_t		digitorpreci(t_modif *modi, size_t neg, size_t nblen, size_t negok)
 	size_t		len;
 
 	len = 0;
+	if (modi->digit > nblen && modi->period > nblen && modi->digit < modi->period)
+		modi->digit = 0;
 	if (modi->digit >= nblen)
 	{
 		len += padding(nblen, modi->digit - modi->plus, ' ');

@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:54:10 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/28 18:50:38 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/05/28 19:38:48 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct	s_modifiers
 	size_t		digit;
 	size_t		period;
 	size_t		cap;
+	size_t		percent;
 }				t_modif;
 
 size_t			ft_printf(const char *format, ...);
@@ -66,7 +67,7 @@ void			search_mod(const char *format, int i, t_modif *modi);
 void			search_flag(const char *format, int i, t_modif *modi);
 int				search_digit(const char *format, int i, t_modif *modi);
 int				search_period(const char *format, int i, t_modif *modi);
-int				search_percent(char l);
+int				search_percent(const char *format, int i, t_modif *modi);
 char			*itoa_base(uintmax_t n, char *base);
 char			*ft_strchr(const char *str, int c);
 int				ft_putwchar(wchar_t value, int size);

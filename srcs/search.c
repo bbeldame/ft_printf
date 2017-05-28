@@ -6,20 +6,18 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 17:05:55 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/28 19:23:49 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/05/28 19:38:42 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int			search_percent(char l)
+int			search_percent(const char *format, int i, t_modif *modi)
 {
-	int			len;
-
-	len = 0;
-	if (l == '%')
-		len += get_charlen('%');
-	return (len);
+	modi->percent = 0;
+	if (format[i] == '\0')
+		return (1);
+	return (0);
 }
 
 void		search_mod(const char *format, int i, t_modif *modi)

@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 17:41:39 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/01 20:49:48 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/28 20:07:53 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ size_t		handle_p(va_list argl, t_modif *modi)
 	nb = (uintmax_t)va_arg(argl, void*);
 	nblen = ft_strlen(ft_itoa(nb));
 	if (modi->digit > 0)
-		while (modi->digit - 2 > nblen)
 		{
 			len += get_charlen(' ');
 			modi->digit--;

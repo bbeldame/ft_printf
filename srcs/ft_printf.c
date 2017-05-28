@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:37:38 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/28 19:23:22 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/05/28 20:13:59 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ size_t			parse(va_list argl, const char *format)
 		{
 			i++;
 			i = parse_flags(format, i, modi);
+			if (modi->percent == 1)
+				return (0);
 			len += search_format(argl, format[i], modi);
 		}
 		else
@@ -53,6 +55,12 @@ int				parse_flags(const char *format, int i, t_modif *modi)
 	i += (modi->mod > 0) ? 1 : 0;
 	if (modi->mod == 2 || modi->mod == 4)
 		i++;
+	if (format[i] == '\0')
+	{
+		modi->percent = search_percent(format, i, modi);
+		if (modi->percent)
+			return (0);
+	}
 	return (i);
 }
 
