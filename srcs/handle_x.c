@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 17:26:47 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/28 20:07:58 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/28 23:01:40 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ size_t		handle_x(va_list argl, t_modif *modi)
 	len = 0;
 	nb = ulenght_mod(argl, modi);
 	base = modi->cap == 1 ? HEXA_CAP : HEXA_MIN;
-	nblen = ft_strlen(itoa_base(nb, base));
-	if (modi->flag == 1 && nb > 0 && modi->cap != 1)
+	nblen = get_uintlen(nb, base);
+	if (modi->flag == 1 && nb > 0 && modi->cap != 1 && !modi->zero)
 		len += get_strlen("0x");
-	if (modi->flag == 1 && nb > 0 && modi->cap == 1)
+	if (modi->flag == 1 && nb > 0 && modi->cap == 1 && !modi->zero)
 		len += get_strlen("0X");
 	if (modi->flag || modi->digit > nblen || modi->period > nblen)
 		len += diouflag(nb, modi, 0, base);

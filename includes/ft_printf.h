@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:54:10 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/28 20:16:03 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/05/28 23:05:45 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct	s_modifiers
 	size_t		period;
 	size_t		cap;
 	size_t		percent;
+	size_t		hexa;
 }				t_modif;
 
 size_t			ft_printf(const char *format, ...);

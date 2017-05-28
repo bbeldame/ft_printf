@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 17:17:21 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/15 14:59:00 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/28 23:02:12 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ size_t		handle_o(va_list argl, t_modif *modi)
 	len = 0;
 	base = "01234567";
 	nb = ulenght_mod(argl, modi);
-	nblen = ft_strlen(itoa_base(nb, base));
+	nblen = get_uintlen(nb, base);
+	modi->plus = modi->plus ? 0 : 0;
 	if (modi->sharp == 1 && nb > 0)
 		len += get_charlen('0');
 	if (modi->flag || modi->digit > nblen || modi->period > nblen)

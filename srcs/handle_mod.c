@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 19:17:25 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/28 20:16:11 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/05/28 23:08:14 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ size_t		diouflag(uintmax_t nb, t_modif *modi, size_t neg, char *base)
 	negok = 0;
 	if (modi->flag || modi->preci || modi->digit)
 	{
-		nblen = ft_strlen(itoa_base(nb, base));
+		nblen = get_uintlen(nb, base);
 		if (neg == 0 && (modi->plus || modi->space))
 		{
 			len += handflag(modi);
@@ -45,7 +45,7 @@ size_t		diouflag(uintmax_t nb, t_modif *modi, size_t neg, char *base)
 		{
 			len += handle_mod(modi, neg, nblen, negok);
 		}
-		if (modi->minus == 0)
+		if (modi->minus == 0 && !modi->hexa)
 			ft_putnbr_base(nb, base);
 	}
 	return (len);
@@ -81,13 +81,14 @@ size_t		flagzero(t_modif *modi, size_t neg, size_t nblen, size_t negok)
 	size_t		len;
 
 	len = 0;
+	if (modi->space)
+		modi->digit -= 1;
 	if (modi->zero)
 	{
 		if (neg && !negok)
 		{
 			len += get_charlen('-');
 			negok = 1;
-			modi->digit -= 1;
 		}
 		modi->digit += (negok && modi->plus) ? 1 : 0;
 		len += padding(nblen, modi->digit - modi->plus - negok, '0');

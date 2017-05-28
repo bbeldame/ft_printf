@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 17:41:39 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/28 20:07:53 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/28 23:02:29 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ size_t		handle_p(va_list argl, t_modif *modi)
 	size_t			nblen;
 
 	len = 0;
+	modi->hexa = 1;
 	nb = (uintmax_t)va_arg(argl, void*);
-	nblen = ft_strlen(ft_itoa(nb));
-	if (modi->digit > 0)
-		{
-			len += get_charlen(' ');
-			modi->digit--;
-		}
+	nblen = get_uintlen(nb, "0123456789");
+	modi->digit -= 2;
+	if (modi->flag || modi->period > nblen || modi->digit > nblen)
+		len += diouflag(nb, modi, 0, HEXA_MIN);
 	len += get_strlen("0x");
-	len = get_uintlen(nb, HEXA_MIN) + len;
+	ft_putnbr_base(nb, HEXA_MIN);
+	len += get_uintlen(nb, HEXA_MIN);
 	return (len);
 }
