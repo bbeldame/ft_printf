@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:37:38 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/18 00:18:01 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/05/28 19:23:22 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,17 @@ int				parse_flags(const char *format, int i, t_modif *modi)
 {
 	search_flag(format, i, modi);
 	i += (modi->flag > 0) ? modi->flag : 0;
-	search_digit(format, i, modi);
-	i += (modi->digit > 0) ? 1 : 0;
-	i += (modi->digit > 9) ? 1 : 0;
-	search_mod(format, i, modi);
-	i += (modi->mod > 0) ? 1 : 0;
-	if (modi->mod == 2 || modi->mod == 4)
-		i++;
+	i += search_digit(format, i, modi);
 	if (format[i] == '.')
 	{
 		i++;
 		modi->preci = 1;
-		if (modi->preci == 1)
-		{
-			i += search_period(format, i, modi);
-		}
+		i += search_period(format, i, modi);
 	}
+	search_mod(format, i, modi);
+	i += (modi->mod > 0) ? 1 : 0;
+	if (modi->mod == 2 || modi->mod == 4)
+		i++;
 	return (i);
 }
 

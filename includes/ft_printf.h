@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:54:10 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/18 00:24:34 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/05/28 18:50:38 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ size_t			search_format(va_list argl, char l, t_modif *modi);
 int				parse_flags(const char *format, int i, t_modif *modi);
 void			search_mod(const char *format, int i, t_modif *modi);
 void			search_flag(const char *format, int i, t_modif *modi);
-void			search_digit(const char *format, int i, t_modif *modi);
+int				search_digit(const char *format, int i, t_modif *modi);
 int				search_period(const char *format, int i, t_modif *modi);
 int				search_percent(char l);
 char			*itoa_base(uintmax_t n, char *base);
@@ -93,7 +93,8 @@ size_t			handle_w(va_list argl, t_modif *modi);
 size_t			handle_ws(va_list argl, t_modif *modi);
 size_t			diouflag(uintmax_t nb, t_modif *modi,
 		size_t neg, char *base);
-size_t			handle_mod(t_modif *modi, size_t neg, size_t nblen);
+size_t			handle_mod(t_modif *modi, size_t neg,
+		size_t nblen, size_t negok);
 size_t			flagzero(t_modif *modi, size_t neg,
 		size_t nblen, size_t negok);
 size_t			digitorpreci(t_modif *modi, size_t neg,

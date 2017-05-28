@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 19:56:57 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/17 22:52:04 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/05/28 19:24:07 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,19 @@ size_t			handle_d(va_list argl, t_modif *modi)
 	nb = neg == 1 ? -nb : nb;
 	nblen = ft_strlen(ft_itoa(nb));
 	if (modi->flag || modi->period > nblen || modi->digit > nblen)
+	{
 		len += diouflag(nb, modi, neg, base);
+	}
 	else
 	{
 		if (modi->preci && !modi->period)
+		{
 			return (len);
+		}
 		if (neg && nb != LONG_MIN)
+		{
 			len += get_charlen('-');
+		}
 		ft_putllnbr(nb);
 	}
 	len += ft_strlen(ft_itoa(nb));

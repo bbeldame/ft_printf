@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 17:05:55 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/18 00:22:34 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/05/28 19:23:49 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,12 @@ void		search_flag(const char *format, int i, t_modif *modi)
 		if (format[i] == '#')
 			modi->sharp = 1;
 		else if (format[i] == '0')
-			modi->zero = 1;
+			modi->zero = (modi->minus) ? 0 : 1;
 		else if (format[i] == '-')
+		{
 			modi->minus = 1;
+			modi->zero = 0;
+		}
 		else if (format[i] == '+')
 			modi->plus = 1;
 		else if (format[i] == ' ')
@@ -69,53 +72,32 @@ void		search_flag(const char *format, int i, t_modif *modi)
 	}
 }
 
-void		search_digit(const char *format, int i, t_modif *modi)
+int			search_digit(const char *format, int i, t_modif *modi)
 {
 	char	*str;
-	int		y;
+	int		len;
 
-	y = 0;
 	modi->digit = 0;
-	str = malloc(sizeof(char) * 5 + 1);
-	if (str)
-	{
-		if (ft_isdigit(format[i]))
-		{
-			str[y] = format[i];
-			y++;
-			i++;
-			if (ft_isdigit(format[i]))
-				str[y] = format[i];
-			modi->digit = ft_atoi(str);
-		}
-		free(str);
-	}
+	if (!ft_isdigit(format[i]))
+		return (0);
+	modi->digit = ft_atoi(format + i);
+	str = ft_itoa(modi->digit);
+	len = ft_strlen(str);
+	free(str);
+	return (len);
 }
 
 int			search_period(const char *format, int i, t_modif *modi)
 {
 	char	*str;
-	int		y;
-	int		stlen;
+	int		len;
 
-	y = 0;
-	stlen = 0;
 	modi->period = 0;
-	if (!(str = malloc(sizeof(char) * 5 + 1)))
-		return (0);
 	if (!ft_isdigit(format[i]))
-		return (modi->period = 0);
-	if (ft_isdigit(format[i]))
-	{
-		while (ft_isdigit(format[i]))
-		{
-			str[y] = format[i];
-			y++;
-			i++;
-		}
-		modi->period = ft_atoi(str);
-		stlen = ft_strlen(str);
-		free(str);
-	}
-	return (stlen);
+		return (0);
+	modi->period = ft_atoi(format + i);
+	str = ft_itoa(modi->period);
+	len = ft_strlen(str);
+	free(str);
+	return (len);
 }
