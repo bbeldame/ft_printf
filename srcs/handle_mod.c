@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 19:17:25 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/28 23:45:21 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/05/28 23:54:30 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,7 @@ size_t		flagzero(t_modif *modi, size_t neg, size_t nblen, size_t negok)
 		}
 		modi->digit += (negok && modi->plus) ? 1 : 0;
 		modi->digit += (negok && modi->space) ? 1 : 0;
-		len += padding(nblen, modi->digit - modi->plus - negok -
-			modi->space, '0');
+		len += padding(nblen, modi->digit - modi->plus - negok, '0');
 		modi->digit = 0;
 	}
 	return (len);
