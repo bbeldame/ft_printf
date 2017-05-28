@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 19:56:57 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/28 23:43:49 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/05/29 00:01:49 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ size_t			handle_d(va_list argl, t_modif *modi)
 	nb = neg == 1 ? -nb : nb;
 	nblen = get_uintlen(nb, base);
 	if (modi->flag || modi->period > nblen || modi->digit > nblen)
-	{
 		len += diouflag(nb, modi, neg, base);
-	}
 	else
 	{
 		if (modi->preci && !modi->period)
