@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:37:38 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/28 22:29:23 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/28 23:47:24 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,18 @@ size_t			search_format(va_list argl, char l, t_modif *modi)
 	size_t				len;
 
 	len = 0;
+	letter = NULL;
 	if (l == '%')
 	{
 		len = (l == '%') ? get_charlen('%') : len;
 		return (len);
 	}
-	letter = ft_strchr("sSpdDioOuUxXcC?", l);
-	len = (*letter == l) ? handle(l, argl, modi) : get_charlen(l);
+	if (ft_strchr("sSpdDioOuUxXcC?", l))
+	{
+		len = handle(l, argl, modi);
+	}
+	else
+		len += get_charlen(l);
 	return (len);
 }
 
