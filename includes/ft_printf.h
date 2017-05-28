@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:54:10 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/28 19:38:48 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/28 20:16:03 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ size_t			flagzero(t_modif *modi, size_t neg,
 size_t			digitorpreci(t_modif *modi, size_t neg,
 		size_t nblen, size_t negok);
 size_t			handflag(t_modif *modi);
-size_t			padding(size_t nblen, size_t dig, char p);
+size_t			padding(size_t nblen, int dig, char p);
 size_t			paddingchar(size_t dig, char p);
 int				ft_putwchar11(unsigned int mask1,
 		unsigned char octet, wchar_t value);

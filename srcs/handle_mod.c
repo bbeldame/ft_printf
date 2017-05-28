@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 19:17:25 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/28 20:13:57 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/28 20:16:11 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ size_t		diouflag(uintmax_t nb, t_modif *modi, size_t neg, char *base)
 		}
 		if (modi->minus > 0)
 		{
+			len += padding(nblen, modi->period, '0');
 			ft_putnbr_base(nb, base);
 		}
-		if (modi->zero)
+		if (modi->zero && !modi->period)
 		{
 			len += flagzero(modi, neg, nblen, negok);
 		}
@@ -88,7 +89,8 @@ size_t		flagzero(t_modif *modi, size_t neg, size_t nblen, size_t negok)
 			negok = 1;
 			modi->digit -= 1;
 		}
-		len += padding(nblen, modi->digit - modi->plus, '0');
+		modi->digit += (negok && modi->plus) ? 1 : 0;
+		len += padding(nblen, modi->digit - modi->plus - negok, '0');
 		modi->digit = 0;
 	}
 	return (len);
@@ -117,17 +119,18 @@ size_t		digitorpreci(t_modif *modi, size_t neg, size_t nblen, size_t negok)
 			len += get_charlen('-');
 			negok = 1;
 		}
-		len += padding(nblen, modi->period, '0');
+		if (!modi->minus)
+			len += padding(nblen, modi->period - modi->minus, '0');
 	}
 	return (len);
 }
 
-size_t		padding(size_t nblen, size_t dig, char p)
+size_t		padding(size_t nblen, int dig, char p)
 {
 	size_t		len;
 
 	len = 0;
-	while (dig > nblen)
+	while (dig > (int)nblen)
 	{
 		len += get_charlen(p);
 		dig--;
