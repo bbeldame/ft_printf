@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_w.c                                      :+:      :+:    :+:   */
+/*   handle_w.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 19:39:24 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/28 23:05:22 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/28 23:45:46 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ size_t		handle_w(va_list argl, t_modif *modi)
 	size_t			size;
 
 	len = 0;
+	if (modi->mod == 2)
+		modi->mod = 0;
 	value = ulenght_mod(argl, modi);
 	if (modi->digit > 0)
 		len += padding(1, modi->digit, ' ');

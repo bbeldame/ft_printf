@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 19:17:25 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/28 23:08:14 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/28 23:45:21 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ size_t		diouflag(uintmax_t nb, t_modif *modi, size_t neg, char *base)
 			len += handflag(modi);
 		}
 		if (neg && !negok && (modi->plus || modi->space || modi->minus)
-			&& (negok = 1) == 1)
+			&& !modi->period && (negok = 1) == 1)
 		{
 			len += get_charlen('-');
 		}
@@ -91,7 +91,9 @@ size_t		flagzero(t_modif *modi, size_t neg, size_t nblen, size_t negok)
 			negok = 1;
 		}
 		modi->digit += (negok && modi->plus) ? 1 : 0;
-		len += padding(nblen, modi->digit - modi->plus - negok, '0');
+		modi->digit += (negok && modi->space) ? 1 : 0;
+		len += padding(nblen, modi->digit - modi->plus - negok -
+			modi->space, '0');
 		modi->digit = 0;
 	}
 	return (len);
@@ -106,7 +108,8 @@ size_t		digitorpreci(t_modif *modi, size_t neg, size_t nblen, size_t negok)
 		modi->digit = 0;
 	if (modi->digit >= nblen)
 	{
-		len += padding(nblen, modi->digit - modi->plus, ' ');
+		len += padding(nblen, modi->digit - modi->plus - modi->space, ' ');
+		len += (neg && (modi->plus || modi->space)) ? get_charlen(' ') : 0;
 		if (neg && !negok)
 		{
 			len += get_charlen('-');
@@ -121,7 +124,10 @@ size_t		digitorpreci(t_modif *modi, size_t neg, size_t nblen, size_t negok)
 			negok = 1;
 		}
 		if (!modi->minus)
+		{
+			len += (modi->plus && !negok) ? get_charlen('+') : 0;
 			len += padding(nblen, modi->period - modi->minus, '0');
+		}
 	}
 	return (len);
 }

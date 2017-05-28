@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 19:56:57 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/28 23:16:05 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/28 23:43:49 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,10 @@ size_t			handflag(t_modif *modi)
 	len = 0;
 	if (modi->plus == 1 && modi->space == 1)
 		modi->space = 0;
-	if (modi->plus == 1)
+	if (modi->plus == 1 && (!modi->preci || modi->minus))
+	{
 		len += get_charlen('+');
+	}
 	if (modi->space == 1)
 		len += get_charlen(' ');
 	return (len);

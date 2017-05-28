@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:54:10 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/28 23:05:45 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/28 23:43:34 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,6 @@ int				ft_putwchar16(unsigned int mask2,
 int				ft_putwchar32(unsigned int mask3,
 		unsigned char octet, wchar_t value);
 void			init_all(t_modif *modi);
+uintmax_t		to_unsigned_char_modulo(uintmax_t nbr);
 
 #endif

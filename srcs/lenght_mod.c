@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lenght_mod.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 19:47:02 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/15 13:24:06 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/28 23:31:07 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ uintmax_t		ulenght_mod(va_list argl, t_modif *modi)
 	uintmax_t nbr;
 
 	nbr = va_arg(argl, uintmax_t);
+	//printf("modi->mod = %zu\n", modi->mod);
 	if (modi->mod == 1 && modi->cap != 1)
 		nbr = (unsigned short int)nbr;
 	else if (modi->mod == 2 && modi->cap != 1)
@@ -55,3 +56,4 @@ uintmax_t		ulenght_mod(va_list argl, t_modif *modi)
 		nbr = (unsigned int)nbr;
 	return (nbr);
 }
+

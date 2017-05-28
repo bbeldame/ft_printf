@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_x.c                                      :+:      :+:    :+:   */
+/*   handle_x.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 17:26:47 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/28 23:01:40 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/28 23:45:30 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ size_t		handle_x(va_list argl, t_modif *modi)
 
 	len = 0;
 	nb = ulenght_mod(argl, modi);
+	if (modi->mod == 2 && modi->cap == 1)
+		nb = (unsigned char)to_unsigned_char_modulo(nb);
 	base = modi->cap == 1 ? HEXA_CAP : HEXA_MIN;
 	nblen = get_uintlen(nb, base);
 	if (modi->flag == 1 && nb > 0 && modi->cap != 1 && !modi->zero)
@@ -37,4 +39,16 @@ size_t		handle_x(va_list argl, t_modif *modi)
 	}
 	len += nblen;
 	return (len);
+}
+
+uintmax_t		to_unsigned_char_modulo(uintmax_t nbr)
+{
+	uintmax_t new_nbr;
+
+	//printf("nbr = %ju\n", nbr);
+	new_nbr = nbr;
+	while (new_nbr >= 256)
+		new_nbr -= 256;
+	//printf("new_nbr = %ju\n", new_nbr);
+	return (new_nbr);
 }
