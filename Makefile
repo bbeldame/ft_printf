@@ -17,7 +17,7 @@ FLAGS = -Wall -Wextra -Werror
 INC = includes
 
 SRC_PATH = srcs
-OBJ_PATH = obj
+OBJ_PATH = .
 LIBFT_PATH = libft
 LIBFTA = libft.a
 LIBFT = $(addprefix $(LIBFT_PATH)/,$(LIBFTA))
