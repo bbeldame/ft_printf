@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 17:26:47 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/28 23:45:30 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/05/29 15:50:54 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,8 @@ uintmax_t		to_unsigned_char_modulo(uintmax_t nbr)
 {
 	uintmax_t new_nbr;
 
-	//printf("nbr = %ju\n", nbr);
 	new_nbr = nbr;
 	while (new_nbr >= 256)
 		new_nbr -= 256;
-	//printf("new_nbr = %ju\n", new_nbr);
 	return (new_nbr);
 }

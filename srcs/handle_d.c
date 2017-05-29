@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 19:56:57 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/29 00:01:49 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/29 17:44:12 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ size_t			handle_d(va_list argl, t_modif *modi)
 		{
 			return (len);
 		}
-		if (neg && nb != LONG_MIN)
+		if (neg)
 		{
 			len += get_charlen('-');
 		}
 		ft_putllnbr(nb);
 	}
-	len += ft_strlen(ft_itoa(nb));
+	len += nblen;
 	return (len);
 }
 

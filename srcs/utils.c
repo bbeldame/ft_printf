@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 00:23:22 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/05/18 00:24:19 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/05/29 16:21:32 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,18 @@
 
 void	init_all(t_modif *modi)
 {
-	modi->sharp = 0;
-	modi->zero = 0;
-	modi->minus = 0;
+	modi->mod = 0;
+	modi->flag = 0;
 	modi->plus = 0;
+	modi->minus = 0;
+	modi->sharp = 0;
 	modi->space = 0;
+	modi->zero = 0;
+	modi->preci = 0;
+	modi->digit = 0;
+	modi->period = 0;
+	modi->percent = 0;
+	modi->cap = 0;
+	modi->hexa = 0;
+
 }

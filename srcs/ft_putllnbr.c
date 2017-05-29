@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 16:09:29 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/17 22:52:01 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/05/29 15:48:31 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void		ft_putllnbr(intmax_t nb)
 {
 	if (nb == LONG_MIN)
-		ft_putstr("-9223372036854775808");
+		ft_putstr("9223372036854775808");
 	else if (nb < 0)
 	{
 		ft_putchar('-');
