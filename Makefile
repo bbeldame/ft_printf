@@ -55,8 +55,8 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@gcc $(FLAGS) -I $(INC) -o $@ -c $<
 
 $(NAME): $(OBJS)
-	# todo : uncomment - @make -C $(LIBFT_PATH)
-	# todo : uncomment - @cp $(LIBFT) ./$(NAME)
+	@make -C $(LIBFT_PATH)
+	@cp $(LIBFT) ./$(NAME)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
 	@echo "$(GREEN)--------ft_printf compiled--------$(NC)"
