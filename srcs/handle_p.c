@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 17:41:39 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/29 16:30:24 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/31 20:11:02 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ size_t		handle_p(va_list argl, t_modif *modi)
 	len = 0;
 	modi->hexa = 1;
 	nb = (uintmax_t)va_arg(argl, void*);
-	nblen = get_uintlen(nb, "0123456789");
+	nblen = get_uintlen(nb, BASE_10);
 	modi->digit -= 2;
 	if (modi->minus)
 		len += get_strlen("0x");

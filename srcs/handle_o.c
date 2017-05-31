@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 17:17:21 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/29 15:49:16 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/31 20:10:32 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,21 @@ size_t		handle_o(va_list argl, t_modif *modi)
 {
 	uintmax_t			nb;
 	size_t				len;
-	char				*base;
 	size_t				nblen;
 
 	len = 0;
-	base = "01234567";
 	nb = ulenght_mod(argl, modi);
-	nblen = get_uintlen(nb, base);
+	nblen = get_uintlen(nb, BASE_8);
 	modi->plus = modi->plus ? 0 : 0;
 	if (modi->sharp == 1 && nb > 0)
 		len += get_charlen('0');
 	if (modi->flag || modi->digit > nblen || modi->period > nblen)
-		len += diouflag(nb, modi, 0, base);
+		len += diouflag(nb, modi, 0, BASE_8);
 	else
 	{
 		if (modi->preci && !modi->period)
 			return (len);
-		ft_putnbr_base(nb, base);
+		ft_putnbr_base(nb, BASE_8);
 	}
 	len += nblen;
 	return (len);

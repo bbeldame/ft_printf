@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:54:10 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/29 17:44:17 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/31 20:07:01 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 # include "../libft/libft.h"
 # define HEXA_MIN "0123456789abcdef"
 # define HEXA_CAP "0123456789ABCDEF"
+# define BASE_10 "0123456789"
+# define BASE_8 "01234567"
+# define BASE_2 "01"
 # define BLACK "\033[22;30m"
 # define WHITE "\033[01;37m"
 # define GRAY "\033[22;37m"
