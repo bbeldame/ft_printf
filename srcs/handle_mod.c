@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 19:17:25 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/29 17:44:14 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/31 20:42:28 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,18 @@ size_t		diouflag(uintmax_t nb, t_modif *modi, size_t neg, char *base)
 	if (modi->flag || modi->preci || modi->digit)
 	{
 		nblen = get_uintlen(nb, base);
-		if (neg == 0 && (modi->plus || modi->space))
-		{
-			len += handflag(modi);
-		}
+		len += (!neg && (modi->plus || modi->space)) ? handflag(modi) : 0;
 		if (neg && !negok && (modi->plus || modi->space || modi->minus)
 			&& !modi->period && (negok = 1) == 1)
-		{
 			len += get_charlen('-');
-		}
 		if (modi->minus > 0)
 		{
 			len += padding(nblen, modi->period, '0');
 			ft_putnbr_base(nb, base);
 		}
-		if (modi->zero && !modi->period)
-		{
-			len += flagzero(modi, neg, nblen, negok);
-		}
+		len += (ZERO && !PERIOD) ? flagzero(modi, neg, nblen, negok) : 0;
 		if (modi->minus || modi->period || modi->digit)
-		{
 			len += handle_mod(modi, neg, nblen, negok);
-		}
 		if (modi->minus == 0 && !modi->hexa)
 			ft_putnbr_base(nb, base);
 	}
@@ -103,25 +93,20 @@ size_t		digitorpreci(t_modif *modi, size_t neg, size_t nblen, size_t negok)
 	size_t		len;
 
 	len = 0;
-	if (modi->digit > nblen && modi->period > nblen && modi->digit < modi->period)
+	if (modi->digit > nblen && modi->period > nblen &&
+		modi->digit < modi->period)
 		modi->digit = 0;
 	if (modi->digit >= nblen)
 	{
 		len += padding(nblen, modi->digit - modi->plus - modi->space, ' ');
 		len += (neg && (modi->plus || modi->space)) ? get_charlen(' ') : 0;
-		if (neg && !negok)
-		{
+		if (neg && !negok && (negok = 1) == 1)
 			len += get_charlen('-');
-			negok = 1;
-		}
 	}
 	if (modi->preci == 1 && modi->period > nblen)
 	{
-		if (neg && !negok)
-		{
+		if (neg && !negok && (negok = 1) == 1)
 			len += get_charlen('-');
-			negok = 1;
-		}
 		if (!modi->minus)
 		{
 			len += (modi->plus && !negok) ? get_charlen('+') : 0;

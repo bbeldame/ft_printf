@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:37:38 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/31 20:18:29 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/05/31 20:35:05 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ size_t			parse(va_list argl, const char *format)
 
 	len = 0;
 	i = 0;
-	modi = malloc(sizeof(t_modif));
-	if (modi == NULL)
+	if (!(modi = malloc(sizeof(t_modif))))
 		return (0);
 	while (format[i])
 	{
@@ -34,9 +33,7 @@ size_t			parse(va_list argl, const char *format)
 			len += search_format(argl, format[i], modi);
 		}
 		else
-		{
-				len += get_charlen(format[i]);
-		}
+			len += get_charlen(format[i]);
 		i++;
 	}
 	init_all(modi);

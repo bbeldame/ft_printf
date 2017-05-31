@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 19:56:57 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/31 20:09:49 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/31 20:24:57 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,9 @@ size_t			handle_d(va_list argl, t_modif *modi)
 	else
 	{
 		if (modi->preci && !modi->period)
-		{
 			return (len);
-		}
 		if (neg)
-		{
 			len += get_charlen('-');
-		}
 		ft_putllnbr(nb);
 	}
 	len += nblen;

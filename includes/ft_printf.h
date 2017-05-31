@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:54:10 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/31 20:20:31 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/05/31 20:41:42 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@
 # define CYAN "\033[22;36m"
 # define LIGHTCYAN "\033[01;36m"
 # define NONE "\033[0m"
+
+# define ZERO modi->zero
+# define PERIOD modi->period
 
 typedef struct	s_modifiers
 {
