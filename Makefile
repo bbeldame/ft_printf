@@ -6,7 +6,7 @@
 #    By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/17 19:49:45 by msakwins          #+#    #+#              #
-#    Updated: 2017/05/29 17:05:45 by msakwins         ###   ########.fr        #
+#    Updated: 2017/05/31 20:20:43 by bbeldame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC_NAME = search.c \
 	handle_d.c \
 	handle_o.c \
 	handle_x.c \
+	handle_b.c \
 	handle_p.c \
 	handle_u.c \
 	handle_w.c \

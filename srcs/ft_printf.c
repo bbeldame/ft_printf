@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:37:38 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/29 17:44:10 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/05/31 20:18:29 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ size_t			search_format(va_list argl, char l, t_modif *modi)
 		len = (l == '%') ? get_charlen('%') : len;
 		return (len);
 	}
-	if (ft_strchr("sSpdDioOuUxXcC?", l))
+	if (ft_strchr("sSpdDioOuUxXcCb?", l))
 	{
 		len = handle(l, argl, modi);
 	}
@@ -108,6 +108,7 @@ size_t			handle(char c, va_list argl, t_modif *modi)
 	len = (c == 'c' || c == 'C') ? handle_w(argl, modi) : len;
 	len = (c == 's' && modi->mod == 0) ? handle_s(argl, modi) : len;
 	len = (c == 'S' || (c == 's' && modi->mod)) ? handle_ws(argl, modi) : len;
+	len = (c == 'b') ? handle_b(argl, modi) : len;
 	return (len);
 }
 
