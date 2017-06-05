@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msakwins <msakwins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 17:05:55 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/29 15:51:23 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/05 20:47:27 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,51 +22,48 @@ int			search_percent(const char *format, int i, t_modif *modi)
 
 void		search_mod(const char *format, int i, t_modif *modi)
 {
-	modi->mod = 0;
+	MOD = 0;
 	if (format[i] == 'h')
 	{
-		modi->mod = 1;
+		MOD = 1;
 		i++;
 		if (format[i] == 'h')
-			modi->mod = 2;
+			MOD = 2;
 	}
 	else if (format[i] == 'l')
 	{
-		modi->mod = 3;
+		MOD = 3;
 		i++;
 		if (format[i] == 'l')
-			modi->mod = 4;
+			MOD = 4;
 	}
 	else if (format[i] == 'j')
-		modi->mod = 5;
+		MOD = 5;
 	else if (format[i] == 'z')
-		modi->mod = 6;
+		MOD = 6;
 }
 
 void		search_flag(const char *format, int i, t_modif *modi)
 {
-	init_all(modi);
-	modi->flag = 0;
+	FLAG = 0;
 	while (format[i] == '#' || format[i] == '0' || format[i] == '-' ||
 			format[i] == '+' || format[i] == ' ')
 	{
 		if (format[i] == '#')
-			modi->sharp = 1;
+			SHARP = 1;
 		else if (format[i] == '0')
-			modi->zero = (modi->minus) ? 0 : 1;
+			ZERO = (MINUS) ? 0 : 1;
 		else if (format[i] == '-')
 		{
-			modi->minus = 1;
-			modi->zero = 0;
+			MINUS = 1;
+			ZERO = 0;
 		}
 		else if (format[i] == '+')
-			modi->plus = 1;
+			PLUS = 1;
 		else if (format[i] == ' ')
-		{
-			modi->space = 1;
-		}
+			SPACE = 1;
 		i++;
-		modi->flag++;
+		FLAG++;
 	}
 }
 
@@ -75,11 +72,11 @@ int			search_digit(const char *format, int i, t_modif *modi)
 	char	*str;
 	int		len;
 
-	modi->digit = 0;
+	DIGIT = 0;
 	if (!ft_isdigit(format[i]))
 		return (0);
-	modi->digit = ft_atoi(format + i);
-	str = ft_itoa(modi->digit);
+	DIGIT = ft_atoi(format + i);
+	str = ft_itoa(DIGIT);
 	len = ft_strlen(str);
 	free(str);
 	return (len);
@@ -90,11 +87,11 @@ int			search_period(const char *format, int i, t_modif *modi)
 	char	*str;
 	int		len;
 
-	modi->period = 0;
+	PERIOD = 0;
 	if (!ft_isdigit(format[i]))
 		return (0);
-	modi->period = ft_atoi(format + i);
-	str = ft_itoa(modi->period);
+	PERIOD = ft_atoi(format + i);
+	str = ft_itoa(PERIOD);
 	len = ft_strlen(str);
 	free(str);
 	return (len);

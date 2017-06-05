@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:40:54 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/31 20:11:09 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/05 20:07:32 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 size_t		handle_s(va_list argl, t_modif *modi)
 {
 	char		*str;
-	size_t		len;
-	size_t		slen;
+	int			len;
+	int			slen;
 
 	len = 0;
 	slen = 0;

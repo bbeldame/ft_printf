@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   handle_x.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msakwins <msakwins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 17:26:47 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/31 20:34:13 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/06/05 20:09:49 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-size_t			handle_x(va_list argl, t_modif *modi)
+int				handle_x(va_list argl, t_modif *modi)
 {
 	size_t				len;
 	uintmax_t			nb;
-	size_t				nblen;
+	int					nblen;
 	char				*base;
 
 	len = 0;

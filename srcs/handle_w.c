@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   handle_w.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msakwins <msakwins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 19:39:24 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/28 23:45:46 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/06/05 20:11:26 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-size_t		handle_w(va_list argl, t_modif *modi)
+int			handle_w(va_list argl, t_modif *modi)
 {
 	wchar_t			value;
 	int				len;
-	size_t			size;
+	int				size;
 
 	len = 0;
 	if (modi->mod == 2)
@@ -29,11 +29,11 @@ size_t		handle_w(va_list argl, t_modif *modi)
 	return (len);
 }
 
-size_t		handle_ws(va_list argl, t_modif *modi)
+int			handle_ws(va_list argl, t_modif *modi)
 {
 	wchar_t			*wstr;
-	size_t			len;
-	size_t			slen;
+	int				len;
+	int				slen;
 
 	len = 0;
 	slen = 0;

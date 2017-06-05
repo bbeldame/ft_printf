@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lenght_mod.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msakwins <msakwins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 19:47:02 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/31 20:26:47 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/06/01 15:41:14 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ intmax_t		lenght_mod(va_list argl, t_modif *modi)
 	else if (modi->mod == 5)
 		nbr = (intmax_t)nbr;
 	else if (modi->mod == 6)
-		nbr = (size_t)nbr;
+		nbr = (intmax_t)nbr;
 	else
 		nbr = (int)nbr;
 	return (nbr);

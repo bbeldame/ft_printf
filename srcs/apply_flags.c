@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putwstr.c                                       :+:      :+:    :+:   */
+/*   apply_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/15 21:12:02 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/01 15:20:06 by msakwins         ###   ########.fr       */
+/*   Created: 2017/06/05 19:52:29 by msakwins          #+#    #+#             */
+/*   Updated: 2017/06/05 21:22:03 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int			ft_putwstr(wchar_t *wstr)
+void		apply_flags(t_modif *modi, int neg)
 {
-	static int	len;
-	int			size;
-
-	len = 0;
-	while (*wstr != '\0')
-	{
-		size = ft_countbits(*wstr);
-		ft_putwchar(*wstr, size);
-		len = (size / 4) + len;
-		wstr++;
-	}
-	return (len);
+	if (PLUS == 1 && SPACE == 1)
+		SPACE = 0;
+	if (PLUS == 1 && (!PRECI || MINUS))
+		LEN += get_charlen('+');
+	if (SPACE == 1 && !neg)
+		LEN += get_charlen(' ');
 }

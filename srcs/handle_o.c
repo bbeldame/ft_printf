@@ -6,17 +6,17 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 17:17:21 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/31 20:10:32 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/05 20:08:33 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-size_t		handle_o(va_list argl, t_modif *modi)
+int			handle_o(va_list argl, t_modif *modi)
 {
 	uintmax_t			nb;
-	size_t				len;
-	size_t				nblen;
+	int					len;
+	int					nblen;
 
 	len = 0;
 	nb = ulenght_mod(argl, modi);

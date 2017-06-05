@@ -3,47 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   handle_mod.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msakwins <msakwins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 19:17:25 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/31 20:42:28 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/06/05 20:53:42 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-size_t		diouflag(uintmax_t nb, t_modif *modi, size_t neg, char *base)
+int			diouflag(uintmax_t nb, t_modif *modi, int neg, char *base)
 {
-	size_t		len;
-	size_t		nblen;
-	size_t		negok;
+	int			nblen;
+	int			negok;
 
-	len = 0;
 	negok = 0;
 	if (modi->flag || modi->preci || modi->digit)
 	{
 		nblen = get_uintlen(nb, base);
-		len += (!neg && (modi->plus || modi->space)) ? handflag(modi) : 0;
+		if (modi->plus || modi->space)
+			apply_flags(modi, neg);
 		if (neg && !negok && (modi->plus || modi->space || modi->minus)
 			&& !modi->period && (negok = 1) == 1)
-			len += get_charlen('-');
+			LEN += get_charlen('-');
 		if (modi->minus > 0)
 		{
-			len += padding(nblen, modi->period, '0');
+			LEN += padding(nblen, modi->period, '0');
 			ft_putnbr_base(nb, base);
 		}
-		len += (ZERO && !PERIOD) ? flagzero(modi, neg, nblen, negok) : 0;
+		LEN += (ZERO && !PERIOD) ? flagzero(modi, neg, nblen, negok) : 0;
 		if (modi->minus || modi->period || modi->digit)
-			len += handle_mod(modi, neg, nblen, negok);
+			LEN += handle_mod(modi, neg, nblen, negok);
 		if (modi->minus == 0 && !modi->hexa)
 			ft_putnbr_base(nb, base);
 	}
-	return (len);
+	return (LEN);
 }
 
-size_t		handle_mod(t_modif *modi, size_t neg, size_t nblen, size_t negok)
+int			handle_mod(t_modif *modi, int neg, int  nblen, int negok)
 {
-	size_t		len;
+	int			len;
 
 	len = 0;
 	if (modi->digit > modi->period && (modi->period > nblen))
@@ -66,9 +65,9 @@ size_t		handle_mod(t_modif *modi, size_t neg, size_t nblen, size_t negok)
 	return (len);
 }
 
-size_t		flagzero(t_modif *modi, size_t neg, size_t nblen, size_t negok)
+int			flagzero(t_modif *modi, int neg, int nblen, int negok)
 {
-	size_t		len;
+	int			len;
 
 	len = 0;
 	if (modi->space)
@@ -88,9 +87,9 @@ size_t		flagzero(t_modif *modi, size_t neg, size_t nblen, size_t negok)
 	return (len);
 }
 
-size_t		digitorpreci(t_modif *modi, size_t neg, size_t nblen, size_t negok)
+int			digitorpreci(t_modif *modi, int neg, int nblen, int negok)
 {
-	size_t		len;
+	int			len;
 
 	len = 0;
 	if (modi->digit > nblen && modi->period > nblen &&
@@ -116,12 +115,12 @@ size_t		digitorpreci(t_modif *modi, size_t neg, size_t nblen, size_t negok)
 	return (len);
 }
 
-size_t		padding(size_t nblen, int dig, char p)
+int			padding(int nblen, int dig, char p)
 {
-	size_t		len;
+	int			len;
 
 	len = 0;
-	while (dig > (int)nblen)
+	while (dig > nblen)
 	{
 		len += get_charlen(p);
 		dig--;

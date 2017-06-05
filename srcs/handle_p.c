@@ -6,17 +6,17 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 17:41:39 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/31 20:11:02 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/05 20:10:13 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-size_t		handle_p(va_list argl, t_modif *modi)
+int			handle_p(va_list argl, t_modif *modi)
 {
 	uintmax_t		nb;
-	size_t			len;
-	size_t			nblen;
+	int				len;
+	int				nblen;
 
 	len = 0;
 	modi->hexa = 1;
