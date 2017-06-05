@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 00:23:22 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/05/31 20:26:42 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/05/29 16:21:32 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,5 @@ void	init_all(t_modif *modi)
 	modi->percent = 0;
 	modi->cap = 0;
 	modi->hexa = 0;
+
 }
