@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:54:10 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/07 20:01:43 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/07 22:17:07 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,10 @@ int				handle_o(va_list argl, t_modif *modi);
 int				handle_u(va_list argl, t_modif *modi);
 int				handle_w(va_list argl, t_modif *modi);
 int				handle_ws(va_list argl, t_modif *modi);
+void			width_errors(t_modif *modi, int nblen);
 void			apply_flags(t_modif *modi);
-void			apply_digits(t_modif *modi, int nblen);
-void			apply_preci(t_modif *modi, int nblen);
+void			apply_digits(t_modif *modi);
+void			apply_preci(t_modif *modi);
 int				padding(int dig, char p);
 size_t			paddingchar(size_t dig, char p);
 int				ft_putwchar11(unsigned int mask1,

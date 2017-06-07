@@ -6,11 +6,32 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/05 19:52:29 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/07 20:37:13 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/07 22:46:16 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+void		width_errors(t_modif *modi, int nblen)
+{
+	if (DIGIT && !PERIOD)
+	{
+		DIGIT = DIGIT - nblen;
+	}
+	else if (PERIOD && !DIGIT)
+	{
+		PRECI = PRECI - nblen;
+	}
+	else if (DIGIT > nblen && PRECI > nblen)
+	{
+		DIGIT = DIGIT - PRECI;
+		PRECI = PRECI - nblen;
+	}
+	else if (DIGIT > nblen && PRECI < nblen)
+		DIGIT = DIGIT - nblen;
+	else if (DIGIT < nblen && PRECI > nblen)
+		PRECI = PRECI - nblen;
+}
 
 void		apply_flags(t_modif *modi)
 {
@@ -18,18 +39,14 @@ void		apply_flags(t_modif *modi)
 		SPACE = 0;
 	if (PLUS == 1 && !NEG)
 		LEN += get_charlen('+');
-	if (SPACE == 1 && !NEG)
+	if (SPACE == 1 && !NEG)    
 		LEN += get_charlen(' ');
 }
 
-void		apply_digits(t_modif *modi, int nblen)
+void		apply_digits(t_modif *modi)
 {
 	char	p;
 
-	if (DIGIT)
-		DIGIT = DIGIT - nblen;
-	if (DIGIT > nblen && PRECI > nblen)
-		DIGIT = DIGIT - (PRECI - nblen);
 	DIGIT -= NEG == 1 ? 1 : 0;
 	if (MINUS == 1 && ZERO == 1)
 		ZERO = 0;
@@ -38,11 +55,10 @@ void		apply_digits(t_modif *modi, int nblen)
 		LEN += padding(DIGIT, p);
 }
 
-void		apply_preci(t_modif *modi, int nblen)
+void		apply_preci(t_modif *modi)
 {
 	if (PERIOD)
 	{
-		PRECI = PRECI - nblen;
 		LEN += padding(PRECI, '0');
 	}
 }

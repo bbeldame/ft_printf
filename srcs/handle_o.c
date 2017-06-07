@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 17:17:21 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/07 20:21:44 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/07 22:46:46 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ int			handle_o(va_list argl, t_modif *modi)
 	SPACE = SPACE == 1 ? 0 : 0;
 	if (SHARP == 1 && nb > 0)
 		LEN += get_charlen('0');
-	if (DIGIT > nblen || ZERO)
+	if (PRECI || DIGIT)
+		width_errors(modi, nblen);
+	if (DIGIT >= nblen || ZERO)
 	{
-		apply_digits(modi, nblen);
+		apply_digits(modi);
 	}
-	if (PRECI > nblen)
-		apply_preci(modi, nblen);
+	if (PRECI >= nblen)
+		apply_preci(modi);
 	ft_putnbr_base(nb, BASE_8);
 	LEN += nblen;
 	return (LEN);
