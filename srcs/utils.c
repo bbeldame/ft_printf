@@ -6,7 +6,7 @@
 /*   By: msakwins <msakwins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 00:23:22 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/06/05 20:24:26 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/07 17:18:23 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,5 @@ void	init_all(t_modif *modi)
 	modi->percent = 0;
 	modi->cap = 0;
 	modi->hexa = 0;
+	modi->neg = 0;
 }

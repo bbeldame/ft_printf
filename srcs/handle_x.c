@@ -6,7 +6,7 @@
 /*   By: msakwins <msakwins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 17:26:47 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/05 20:09:49 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/07 20:21:32 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,19 @@ int				handle_x(va_list argl, t_modif *modi)
 	nblen = get_uintlen(nb, base);
 	if (modi->sharp && nb > 0)
 		len += (modi->cap) ? get_strlen("0X") : get_strlen("0x");
-	modi->digit -= (modi->sharp && (modi->zero || modi->minus)) ? 2 : 0;
-	if (modi->flag || modi->digit > nblen || modi->period > nblen)
-		len += diouflag(nb, modi, 0, base);
-	else
+	PLUS = PLUS == 1 ? 0 : 0;
+	SPACE = SPACE == 1 ? 0 : 0;
+	if (SHARP == 1 && nb > 0)
+		LEN += get_charlen('0');
+	if (DIGIT > nblen || ZERO)
 	{
-		if (modi->preci && !modi->period)
-			return (len);
-		ft_putnbr_base(nb, base);
+		apply_digits(modi, nblen);
 	}
-	len += nblen;
-	return (len);
+	if (PRECI > nblen)
+		apply_preci(modi, nblen);
+	ft_putnbr_base(nb, base);
+	LEN += nblen;
+	return (LEN);
 }
 
 uintmax_t		to_unsigned_char_modulo(uintmax_t nbr)

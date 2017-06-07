@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:54:10 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/31 20:41:42 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/06/07 20:01:43 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,30 +45,43 @@
 # define LIGHTCYAN "\033[01;36m"
 # define NONE "\033[0m"
 
+# define LEN modi->len
+# define MOD modi->mod
+# define FLAG modi->flag
+# define PLUS modi->plus
+# define MINUS modi->minus
+# define SHARP modi->sharp
+# define SPACE modi->space
 # define ZERO modi->zero
+# define PRECI modi->preci
+# define DIGIT modi->digit
 # define PERIOD modi->period
+# define CAP modi->cap
+# define NEG modi->neg
 
 typedef struct	s_modifiers
 {
-	size_t		mod;
-	size_t		flag;
-	size_t		plus;
-	size_t		minus;
-	size_t		sharp;
-	size_t		space;
-	size_t		zero;
-	size_t		preci;
-	size_t		digit;
-	size_t		period;
-	size_t		cap;
-	size_t		percent;
-	size_t		hexa;
+	int			len;
+	int			mod;
+	int			flag;
+	int			plus;
+	int			minus;
+	int			sharp;
+	int			space;
+	int			zero;
+	int			preci;
+	int			digit;
+	int			period;
+	int			cap;
+	int			percent;
+	int			hexa;
+	int			neg;
 }				t_modif;
 
-size_t			ft_printf(const char *format, ...);
-size_t			parse(va_list argl, const char *format);
-size_t			handle(char c, va_list argl, t_modif *modi);
-size_t			search_format(va_list argl, char l, t_modif *modi);
+int				ft_printf(const char *format, ...);
+int				parse(va_list argl, const char *format, t_modif *modi);
+int				handle(char c, va_list argl, t_modif *modi);
+int				search_format(va_list argl, char l, t_modif *modi);
 int				parse_flags(const char *format, int i, t_modif *modi);
 void			search_mod(const char *format, int i, t_modif *modi);
 void			search_flag(const char *format, int i, t_modif *modi);
@@ -92,23 +105,17 @@ int				ft_countbits(wchar_t value);
 intmax_t		lenght_mod(va_list argl, t_modif *modi);
 uintmax_t		ulenght_mod(va_list argl, t_modif *modi);
 size_t			handle_s(va_list argl, t_modif *modi);
-size_t			handle_d(va_list argl, t_modif *modi);
-size_t			handle_x(va_list argl, t_modif *modi);
-size_t			handle_p(va_list argl, t_modif *modi);
-size_t			handle_o(va_list argl, t_modif *modi);
-size_t			handle_u(va_list argl, t_modif *modi);
-size_t			handle_w(va_list argl, t_modif *modi);
-size_t			handle_ws(va_list argl, t_modif *modi);
-size_t			diouflag(uintmax_t nb, t_modif *modi,
-		size_t neg, char *base);
-size_t			handle_mod(t_modif *modi, size_t neg,
-		size_t nblen, size_t negok);
-size_t			flagzero(t_modif *modi, size_t neg,
-		size_t nblen, size_t negok);
-size_t			digitorpreci(t_modif *modi, size_t neg,
-		size_t nblen, size_t negok);
-size_t			handflag(t_modif *modi);
-size_t			padding(size_t nblen, int dig, char p);
+int				handle_d(va_list argl, t_modif *modi);
+int				handle_x(va_list argl, t_modif *modi);
+int				handle_p(va_list argl, t_modif *modi);
+int				handle_o(va_list argl, t_modif *modi);
+int				handle_u(va_list argl, t_modif *modi);
+int				handle_w(va_list argl, t_modif *modi);
+int				handle_ws(va_list argl, t_modif *modi);
+void			apply_flags(t_modif *modi);
+void			apply_digits(t_modif *modi, int nblen);
+void			apply_preci(t_modif *modi, int nblen);
+int				padding(int dig, char p);
 size_t			paddingchar(size_t dig, char p);
 int				ft_putwchar11(unsigned int mask1,
 		unsigned char octet, wchar_t value);

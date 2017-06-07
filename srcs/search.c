@@ -6,7 +6,7 @@
 /*   By: msakwins <msakwins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 17:05:55 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/05 20:47:27 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/07 20:53:03 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,11 @@ int			search_period(const char *format, int i, t_modif *modi)
 	char	*str;
 	int		len;
 
-	PERIOD = 0;
+	PRECI = 0;
 	if (!ft_isdigit(format[i]))
 		return (0);
-	PERIOD = ft_atoi(format + i);
-	str = ft_itoa(PERIOD);
+	PRECI = ft_atoi(format + i);
+	str = ft_itoa(PRECI);
 	len = ft_strlen(str);
 	free(str);
 	return (len);

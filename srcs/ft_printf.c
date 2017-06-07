@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 13:47:12 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/05 21:21:59 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/07 20:49:16 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ int				parse(va_list argl, const char *format, t_modif *modi)
 			i = parse_flags(format, i, modi);
 			if (modi->percent == 1)
 				return (0);
-			printf("LEN = %d\n", LEN);
-			LEN += search_format(argl, format[i], modi);
-			printf("LENAFTER = %d\n", LEN);
+			LEN = search_format(argl, format[i], modi);
 		}
 		else
 			LEN += get_charlen(format[i]);
@@ -44,7 +42,7 @@ int				parse_flags(const char *format, int i, t_modif *modi)
 	if (format[i] == '.')
 	{
 		i++;
-		modi->preci = 1;
+		PERIOD = 1;
 		i += search_period(format, i, modi);
 	}
 	search_mod(format, i, modi);
@@ -68,13 +66,15 @@ int				search_format(va_list argl, char l, t_modif *modi)
 		return (LEN);
 	}
 	if (ft_strchr("sSpdDioOuUxXcCb?", l))
+	{
 		LEN = handle(l, argl, modi);
+	}
 	else
 	{
 		LEN += get_charlen(l);
 		if (modi->digit > 0)
 		{
-			LEN += padding(1, modi->digit, ' ');
+			LEN += padding(DIGIT, ' ');
 		}
 	}
 	return (LEN);

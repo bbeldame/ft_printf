@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:40:54 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/05 20:07:32 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/07 20:22:03 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,30 @@
 size_t		handle_s(va_list argl, t_modif *modi)
 {
 	char		*str;
-	int			len;
 	int			slen;
 
-	len = 0;
 	slen = 0;
 	str = va_arg(argl, char *);
 	str = str == NULL ? "(null)" : str;
-	if (modi->period || modi->digit)
+	if (PERIOD || DIGIT)
 	{
 		slen = ft_strlen(str);
-		slen = modi->period < slen ? modi->period : slen;
-		modi->digit -= modi->digit < slen ? modi->digit : 0;
-		len += modi->digit ? paddingchar(modi->digit - slen, ' ') : 0;
-		if (modi->period)
+		if (PRECI && PRECI < slen)
 		{
-			if (modi->period > slen)
-				return (len += get_strlen(str));
-			ft_putnstr(str, modi->period);
-			len += modi->period;
+			LEN += PRECI;
+			ft_putnstr(str, PRECI);
+		}
+		if (DIGIT)
+		{
+			DIGIT = DIGIT - slen;
+			LEN += paddingchar(DIGIT, ' ');
+			ft_putstr(str);
+			LEN += slen;
 		}
 	}
 	else
-		len = get_strlen(str);
-	return (len);
+		LEN += get_strlen(str);
+	return (LEN);
 }
 
 size_t		paddingchar(size_t dig, char p)

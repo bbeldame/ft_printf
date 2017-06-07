@@ -6,7 +6,7 @@
 #    By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/17 19:49:45 by msakwins          #+#    #+#              #
-#    Updated: 2017/05/31 20:20:43 by bbeldame         ###   ########.fr        #
+#    Updated: 2017/06/05 20:50:32 by msakwins         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRC_NAME = search.c \
 	ft_countbits.c \
 	lenght_mod.c \
 	handle_mod.c \
+	apply_flags.c \
 	utils.c
 
 SRCS = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
