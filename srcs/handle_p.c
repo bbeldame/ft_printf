@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_p.c                                      :+:      :+:    :+:   */
+/*   handle_p.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 17:41:39 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/09 18:41:54 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/09 22:48:22 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ int			handle_p(va_list argl, t_modif *modi)
 
 	modi->hexa = 1;
 	nb = (uintmax_t)va_arg(argl, void*);
-	nblen = get_uintlen(nb, BASE_10);
+	nblen = get_uintlen(nb, HEXA_MIN);
 	DIGIT -= 2;
-	PLUS = PLUS == 1 ? 0 : 0;
-	SPACE = SPACE == 1 ? 0 : 0;
+	PLUS = 0;
+	SPACE = 0;
+	if (period_zero(nb, modi))
+		return (LEN + get_strlen("0x"));
 	if (PRECI || DIGIT)
 		width_errors(modi, nblen);
 	if (SHARP == 1 && nb > 0)
@@ -36,13 +38,12 @@ int			handle_p(va_list argl, t_modif *modi)
 	{
 		apply_digits(modi);
 	}
+	if (!MINUS && !ZERO)
+		LEN += get_strlen("0x");
 	if (PRECI > 0)
 		apply_preci(modi);
 	if (!MINUS && !ZERO)
-	{
-		LEN += get_strlen("0x");
 		ft_putnbr_base(nb, HEXA_MIN);
-	}
 	LEN += get_uintlen(nb, HEXA_MIN);
 	return (LEN);
 }
