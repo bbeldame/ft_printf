@@ -6,7 +6,7 @@
 /*   By: msakwins <msakwins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 19:39:24 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/09 18:02:33 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/09 22:20:13 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ int			handle_ws(va_list argl, t_modif *modi)
 {
 	wchar_t			*wstr;
 	int				slen;
+	int				tmplen;
 
 	slen = 0;
+	tmplen = 0;
 	wstr = va_arg(argl, wchar_t*);
 	if (wstr == NULL)
 	{
@@ -43,11 +45,22 @@ int			handle_ws(va_list argl, t_modif *modi)
 		return (LEN);
 	}
 	slen = get_wlen(wstr);
-	if (DIGIT > slen)
+	if (PERIOD == 1 || DIGIT > 0)
 	{
-		DIGIT = DIGIT - slen;
-		apply_digits(modi);
-		LEN += ft_putwstr(wstr);
+		if (PERIOD == 1 && PRECI < slen && DIGIT > 0)
+		{
+			slen = PRECI;
+		}
+		if (DIGIT > slen)
+		{
+			DIGIT = DIGIT - slen;
+			apply_digits(modi);
+			LEN += ft_putwstr(wstr);
+		}
+		if (PERIOD == 1 && PRECI < slen)
+		{
+			LEN += ft_putwnstr(wstr, PRECI);
+		}
 	}
 	else
 		LEN += ft_putwstr(wstr);

@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:40:54 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/09 18:49:28 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/09 21:27:55 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ size_t		handle_s(va_list argl, t_modif *modi)
 		{
 			apply_digits(modi);
 		}
-		if (PERIOD && PRECI < slen)
+		if (PERIOD == 1 && PRECI >= 0 && PRECI < slen)
 		{
 			LEN += PRECI;
 			ft_putnstr(str, PRECI);
 		}
-		if (!PRECI || PRECI > nblen)
+		else
 		{
 			ft_putstr(str);
 			LEN += slen;

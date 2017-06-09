@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 17:12:47 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/09 17:19:35 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/09 21:48:45 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,30 @@ int			get_strlen(char *str)
 	return (len);
 }
 
+int			get_clen(int size)
+{
+	int		clen;
+
+	clen = 0;
+
+	clen = size <= 7 ? 1 : clen;
+	clen = (size > 7 && size <= 11) ? 2 : clen;
+	clen = (size > 11 && size <= 16) ? 3 : clen;
+	clen = (size > 16 && size <= 32) ? 4 : clen;
+	return (clen);
+}
+
 int			get_wlen(wchar_t *wstr)
 {
 	int		size;
 	int		wlen;
-	
+
 	wlen = 0;
+	size = 0;
 	while (*wstr != '\0')
 	{
 		size = ft_countbits(*wstr);
-		wlen += size <= 7 ? 1 : 0;
-		wlen += (size > 7 && size <= 11) ? 2 : 0;
-		wlen += (size > 11 && size <= 16) ? 3 : 0;
-		wlen += (size > 16 && size <= 32) ? 4 : 0;
+		wlen += get_clen(size);
 		wstr++;
 	}
 	return (wlen);

@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/05 19:52:29 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/09 20:48:36 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/09 22:10:27 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ void		width_errors(t_modif *modi, int nblen)
 
 void		width_errs(t_modif *modi, int slen)
 {
-	if (DIGIT && !PERIOD)
+	if (DIGIT > 0 && DIGIT < slen)
+		DIGIT = 0;
+	if (DIGIT > 0 && !PERIOD)
 		DIGIT = DIGIT - slen;
-	if (DIGIT && PERIOD)
-	{
+	if (DIGIT > 0 && PERIOD > 0)
 		DIGIT = DIGIT - slen;
-	}
 }
 
 void		apply_flags(t_modif *modi)
