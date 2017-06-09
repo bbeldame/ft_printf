@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/05 19:52:29 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/07 22:46:16 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/09 20:48:36 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,16 @@
 
 void		width_errors(t_modif *modi, int nblen)
 {
-	if (DIGIT && !PERIOD)
+	if (DIGIT > 0 || PRECI > 0)
+	{
+		DIGIT = DIGIT < nblen ? 0 : DIGIT;
+		PRECI = PRECI < nblen ? 0 : PRECI;
+	}
+	if (DIGIT > 0 && PRECI == 0)
 	{
 		DIGIT = DIGIT - nblen;
 	}
-	else if (PERIOD && !DIGIT)
+	else if (PRECI > 0 && DIGIT == 0)
 	{
 		PRECI = PRECI - nblen;
 	}
@@ -31,6 +36,16 @@ void		width_errors(t_modif *modi, int nblen)
 		DIGIT = DIGIT - nblen;
 	else if (DIGIT < nblen && PRECI > nblen)
 		PRECI = PRECI - nblen;
+}
+
+void		width_errs(t_modif *modi, int slen)
+{
+	if (DIGIT && !PERIOD)
+		DIGIT = DIGIT - slen;
+	if (DIGIT && PERIOD)
+	{
+		DIGIT = DIGIT - slen;
+	}
 }
 
 void		apply_flags(t_modif *modi)

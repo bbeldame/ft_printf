@@ -6,7 +6,7 @@
 /*   By: msakwins <msakwins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 17:26:47 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/07 22:45:10 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/09 18:42:19 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,16 @@ int				handle_x(va_list argl, t_modif *modi)
 	base = modi->cap == 1 ? HEXA_CAP : HEXA_MIN;
 	nblen = get_uintlen(nb, base);
 	if (modi->sharp && nb > 0)
-		len += (modi->cap) ? get_strlen("0X") : get_strlen("0x");
+		LEN += (modi->cap) ? get_strlen("0X") : get_strlen("0x");
 	PLUS = PLUS == 1 ? 0 : 0;
 	SPACE = SPACE == 1 ? 0 : 0;
-	if (SHARP == 1 && nb > 0)
-		LEN += get_charlen('0');
 	if (DIGIT || PRECI)
 		width_errors(modi, nblen);
-	if (DIGIT > nblen)
+	if (DIGIT > 0)
 	{
 		apply_digits(modi);
 	}
-	if (PRECI > nblen)
+	if (PRECI > 0)
 		apply_preci(modi);
 	ft_putnbr_base(nb, base);
 	LEN += nblen;

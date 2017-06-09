@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 13:47:12 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/07 22:17:37 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/09 16:16:45 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int				parse(va_list argl, const char *format, t_modif *modi)
 			i = parse_flags(format, i, modi);
 			if (modi->percent == 1)
 				return (0);
-			LEN = search_format(argl, format[i], modi);
+			search_format(argl, format[i], modi);
 		}
 		else
 			LEN += get_charlen(format[i]);
@@ -58,16 +58,15 @@ int				parse_flags(const char *format, int i, t_modif *modi)
 	return (i);
 }
 
-int				search_format(va_list argl, char l, t_modif *modi)
+void			search_format(va_list argl, char l, t_modif *modi)
 {
-	if (l == '%')
-	{
-		LEN = (l == '%') ? get_charlen('%') : LEN;
-		return (LEN);
-	}
+//	if (l == '%')
+//	{
+//		LEN += (l == '%') ? get_charlen('%') : 0;
+//	}
 	if (ft_strchr("sSpdDioOuUxXcCb?", l))
 	{
-		LEN = handle(l, argl, modi);
+		handle(l, argl, modi);
 	}
 	else
 	{
@@ -77,10 +76,9 @@ int				search_format(va_list argl, char l, t_modif *modi)
 			LEN += padding(DIGIT, ' ');
 		}
 	}
-	return (LEN);
 }
 
-int				handle(char c, va_list argl, t_modif *modi)
+void			handle(char c, va_list argl, t_modif *modi)
 {
 	if (c == 'D' || c == 'O' || c == 'X' || c == 'U')
 		modi->cap = 1;
@@ -93,7 +91,6 @@ int				handle(char c, va_list argl, t_modif *modi)
 	LEN = (c == 's' && modi->mod == 0) ? handle_s(argl, modi) : LEN;
 	LEN = (c == 'S' || (c == 's' && modi->mod)) ? handle_ws(argl, modi) : LEN;
 	LEN = (c == 'b') ? handle_b(argl, modi) : LEN;
-	return (LEN);
 }
 
 int				ft_printf(const char *format, ...)
@@ -101,7 +98,8 @@ int				ft_printf(const char *format, ...)
 	va_list				argl;
 	t_modif				*modi;
 	int					len;
-
+	
+	len = 0;
 	if (!(modi = malloc(sizeof(t_modif))))
 		return (0);
 	init_all(modi);

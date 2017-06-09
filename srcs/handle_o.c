@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 17:17:21 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/07 22:46:46 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/09 18:41:33 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int			handle_o(va_list argl, t_modif *modi)
 		LEN += get_charlen('0');
 	if (PRECI || DIGIT)
 		width_errors(modi, nblen);
-	if (DIGIT >= nblen || ZERO)
+	if (DIGIT > 0)
 	{
 		apply_digits(modi);
 	}
-	if (PRECI >= nblen)
+	if (PRECI > 0)
 		apply_preci(modi);
 	ft_putnbr_base(nb, BASE_8);
 	LEN += nblen;

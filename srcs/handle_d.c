@@ -6,7 +6,7 @@
 /*   By: msakwins <msakwins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 19:56:57 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/07 22:55:10 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/09 20:47:00 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,14 @@ int			handle_d(va_list argl, t_modif *modi)
 	NEG = nb < 0 ? 1 : 0;
 	nb = NEG == 1 ? -nb : nb;
 	nblen = get_uintlen(nb, BASE_10);
-	if (PERIOD || DIGIT)
+	if (PRECI > 0 || DIGIT > 0)
 		width_errors(modi, nblen);
+	if (MINUS)
+	{
+		if (NEG)
+			LEN += get_charlen('-');
+		ft_putnbr_base(nb, BASE_10);
+	}
 	if (PLUS || SPACE)
 	{
 		apply_flags(modi);
@@ -34,22 +40,23 @@ int			handle_d(va_list argl, t_modif *modi)
 		LEN += get_charlen('-');
 		negatif = 1;
 	}
-	if (DIGIT >= nblen)
+	if (DIGIT > 0)
 	{
 		apply_digits(modi);
 	}
-	if (NEG == 1 && !negatif && PERIOD == 1)
+	if (NEG == 1 && !negatif && PRECI > 0)
 	{
 		LEN += get_charlen('-');
 		negatif = 1;
 	}
-	if (PRECI >= nblen)
+	if (PRECI > 0)
 	{
 		apply_preci(modi);
 	}
-	if (NEG == 1 && !ZERO && !PERIOD)
+	if (NEG == 1 && !ZERO && !PRECI && !MINUS)
 		LEN += get_charlen('-');
-	ft_putnbr_base(nb, BASE_10);
+	if (!MINUS)
+		ft_putnbr_base(nb, BASE_10);
 	LEN += nblen;
 	return (LEN);
 }

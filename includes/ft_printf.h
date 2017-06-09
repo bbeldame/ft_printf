@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:54:10 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/07 22:17:07 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/09 18:56:29 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ typedef struct	s_modifiers
 
 int				ft_printf(const char *format, ...);
 int				parse(va_list argl, const char *format, t_modif *modi);
-int				handle(char c, va_list argl, t_modif *modi);
-int				search_format(va_list argl, char l, t_modif *modi);
+void			handle(char c, va_list argl, t_modif *modi);
+void			search_format(va_list argl, char l, t_modif *modi);
 int				parse_flags(const char *format, int i, t_modif *modi);
 void			search_mod(const char *format, int i, t_modif *modi);
 void			search_flag(const char *format, int i, t_modif *modi);
@@ -98,6 +98,7 @@ int				get_intlen(intmax_t nb);
 int				get_uintlen(uintmax_t nb, char *base);
 int				get_charlen(char c);
 int				get_strlen(char *str);
+int				get_wlen(wchar_t *wstr);
 int				get_octlen(uintmax_t nb);
 void			ft_putnstr(const char *s, size_t n);
 int				ft_putwstr(wchar_t *wstr);
@@ -113,6 +114,7 @@ int				handle_u(va_list argl, t_modif *modi);
 int				handle_w(va_list argl, t_modif *modi);
 int				handle_ws(va_list argl, t_modif *modi);
 void			width_errors(t_modif *modi, int nblen);
+void			width_errs(t_modif *modi, int sblen);
 void			apply_flags(t_modif *modi);
 void			apply_digits(t_modif *modi);
 void			apply_preci(t_modif *modi);

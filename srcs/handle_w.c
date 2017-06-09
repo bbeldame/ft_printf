@@ -6,7 +6,7 @@
 /*   By: msakwins <msakwins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 19:39:24 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/07 20:48:56 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/09 18:02:33 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@ int			handle_w(va_list argl, t_modif *modi)
 {
 	wchar_t			value;
 	int				size;
+	int				nblen;
 
 	if (modi->mod == 2)
 		modi->mod = 0;
 	value = ulenght_mod(argl, modi);
-	if (modi->digit > 0)
-		LEN += padding(modi->digit, ' ');
 	size = ft_countbits(value);
+	nblen = size <= 7 ? 1 : size / 8;
+	width_errors(modi, nblen);
+	if (DIGIT > 0)
+		apply_digits(modi);
 	LEN += ft_putwchar(value, size);
 	return (LEN);
 }
@@ -36,12 +39,17 @@ int			handle_ws(va_list argl, t_modif *modi)
 	wstr = va_arg(argl, wchar_t*);
 	if (wstr == NULL)
 	{
-		LEN = get_strlen("(null)");
+		LEN += get_strlen("(null)");
 		return (LEN);
 	}
-	if (modi->period || modi->digit)
-		LEN = ft_putwstr(wstr);
+	slen = get_wlen(wstr);
+	if (DIGIT > slen)
+	{
+		DIGIT = DIGIT - slen;
+		apply_digits(modi);
+		LEN += ft_putwstr(wstr);
+	}
 	else
-		LEN = ft_putwstr(wstr);
+		LEN += ft_putwstr(wstr);
 	return (LEN);
 }

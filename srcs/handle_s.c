@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:40:54 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/07 23:01:54 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/09 18:49:28 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,28 @@ size_t		handle_s(va_list argl, t_modif *modi)
 {
 	char		*str;
 	int			slen;
+	int			nblen;
 
 	slen = 0;
+	nblen = 0;
 	str = va_arg(argl, char *);
 	str = str == NULL ? "(null)" : str;
 	if (PERIOD || DIGIT)
 	{
 		slen = ft_strlen(str);
-		if (PRECI && PRECI < slen)
+		nblen = PERIOD && PRECI < slen ? PRECI : slen;
+		width_errs(modi, nblen);
+		if (DIGIT)
+		{
+			apply_digits(modi);
+		}
+		if (PERIOD && PRECI < slen)
 		{
 			LEN += PRECI;
 			ft_putnstr(str, PRECI);
 		}
-		if (PRECI > slen)
+		if (!PRECI || PRECI > nblen)
 		{
-			ft_putstr(str);
-			LEN += slen;
-		}
-		if (DIGIT)
-		{
-			DIGIT = DIGIT - slen;
-			LEN += paddingchar(DIGIT, ' ');
 			ft_putstr(str);
 			LEN += slen;
 		}
