@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 17:12:47 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/09 21:48:45 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/09 22:54:50 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int			get_clen(int size)
 	return (clen);
 }
 
-int			get_wlen(wchar_t *wstr)
+int			get_wstrlen(wchar_t *wstr)
 {
 	int		size;
 	int		wlen;

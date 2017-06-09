@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:54:10 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/09 22:21:37 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/06/09 22:59:15 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ int				get_intlen(intmax_t nb);
 int				get_uintlen(uintmax_t nb, char *base);
 int				get_charlen(char c);
 int				get_strlen(char *str);
-int				get_wlen(wchar_t *wstr);
+int				get_wstrlen(wchar_t *wstr);
+int				get_preciw(wchar_t *wstr, int n);
 int				get_clen(int size);
 int				get_octlen(uintmax_t nb);
 void			ft_putnstr(const char *s, size_t n);

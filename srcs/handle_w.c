@@ -6,7 +6,7 @@
 /*   By: msakwins <msakwins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 19:39:24 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/09 22:20:13 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/09 23:06:40 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,30 +34,30 @@ int			handle_ws(va_list argl, t_modif *modi)
 {
 	wchar_t			*wstr;
 	int				slen;
-	int				tmplen;
+	int				wlen;
 
 	slen = 0;
-	tmplen = 0;
+	wlen = 0;
 	wstr = va_arg(argl, wchar_t*);
 	if (wstr == NULL)
 	{
 		LEN += get_strlen("(null)");
 		return (LEN);
 	}
-	slen = get_wlen(wstr);
+	slen = get_wstrlen(wstr);
 	if (PERIOD == 1 || DIGIT > 0)
 	{
-		if (PERIOD == 1 && PRECI < slen && DIGIT > 0)
-		{
-			slen = PRECI;
-		}
-		if (DIGIT > slen)
-		{
-			DIGIT = DIGIT - slen;
-			apply_digits(modi);
+		wlen = PERIOD == 1 && PRECI < slen ? get_preciw(wstr, PRECI) : slen;
+		if (PERIOD == 0 && MINUS)
 			LEN += ft_putwstr(wstr);
+		if (DIGIT > wlen)
+		{
+			DIGIT = DIGIT - wlen;
+			apply_digits(modi);
+			if (PERIOD == 0 && !MINUS)
+				LEN += ft_putwstr(wstr);
 		}
-		if (PERIOD == 1 && PRECI < slen)
+		if (PERIOD == 1 && PRECI >= 0 && PRECI <= slen)
 		{
 			LEN += ft_putwnstr(wstr, PRECI);
 		}

@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 21:12:02 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/09 22:10:20 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/09 23:00:25 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,26 @@ int			ft_putwstr(wchar_t *wstr)
 		wstr++;
 	}
 	return (len);
+}
+
+int		get_preciw(wchar_t *wstr, int n)
+{
+	int			size;
+	int			clen;
+	int			wlen;
+
+	size = 0;
+	clen = 0;
+	wlen = 0;
+	while (n >= clen)
+	{
+		size = ft_countbits(*wstr);
+		clen = get_clen(size);
+		n -= clen;
+		wlen += clen;
+		wstr++;
+	}
+	return (wlen);
 }
 
 int		ft_putwnstr(wchar_t *wstr, int n)
