@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 13:47:12 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/09 16:16:45 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/09 21:56:13 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,7 @@ void			search_format(va_list argl, char l, t_modif *modi)
 	}
 	else
 	{
-		LEN += get_charlen(l);
-		if (modi->digit > 0)
-		{
-			LEN += padding(DIGIT, ' ');
-		}
+		LEN = handle_bd(modi, l);
 	}
 }
 

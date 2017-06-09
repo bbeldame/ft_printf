@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_o.c                                      :+:      :+:    :+:   */
+/*   handle_o.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 17:17:21 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/09 18:41:33 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/09 21:34:15 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int			handle_o(va_list argl, t_modif *modi)
 	SPACE = SPACE == 1 ? 0 : 0;
 	if (SHARP == 1 && nb > 0)
 		LEN += get_charlen('0');
+	if (period_zero(nb, modi))
+		return (LEN);
 	if (PRECI || DIGIT)
 		width_errors(modi, nblen);
 	if (DIGIT > 0)

@@ -1,44 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_u.c                                         :+:      :+:    :+:   */
+/*   handle_bd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 15:46:28 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/09 21:35:47 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/06/09 22:01:48 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int			handle_u(va_list argl, t_modif *modi)
-{
-	uintmax_t			nb;
-	int					len;
-	int					nblen;
-	int					neg;
+/*
+** Handle some bad behavior
+** Bad format
+*/
 
-	neg = 0;
-	len = 0;
-	nb = ulenght_mod(argl, modi);
-	nblen = get_uintlen(nb, BASE_10);
-	PLUS = PLUS == 1 ? 0 : 0;
-	SPACE = SPACE == 1 ? 0 : 0;
-	if (SHARP == 1 && nb > 0)
-		LEN += get_charlen('0');
-	if (period_zero(nb, modi))
-		return (LEN);
-	if (DIGIT || PRECI)
-		width_errors(modi, nblen);
+int			handle_bd(t_modif *modi, char c)
+{
+	if (MINUS)
+	{
+		LEN += get_charlen(c);
+	}
 	if (DIGIT > 0)
 	{
-		apply_digits(modi);
+		if (ZERO)
+			LEN += padding(DIGIT - 1, '0');
+		else
+			LEN += padding(DIGIT - 1, ' ');
 	}
-	if (PRECI > 0)
-		apply_preci(modi);
-	ft_putnbr_base(nb, BASE_10);
-	LEN += nblen;
+	if (!MINUS)
+	{
+		LEN += get_charlen(c);
+	}
 	return (LEN);
-
 }

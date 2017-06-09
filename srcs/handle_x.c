@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_x.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <msakwins@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 17:26:47 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/09 18:42:19 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/09 21:34:22 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int				handle_x(va_list argl, t_modif *modi)
 		LEN += (modi->cap) ? get_strlen("0X") : get_strlen("0x");
 	PLUS = PLUS == 1 ? 0 : 0;
 	SPACE = SPACE == 1 ? 0 : 0;
+	if (period_zero(nb, modi))
+		return (LEN);
 	if (DIGIT || PRECI)
 		width_errors(modi, nblen);
 	if (DIGIT > 0)

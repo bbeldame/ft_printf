@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_d.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <msakwins@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 19:56:57 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/09 20:52:21 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/09 22:21:28 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int			handle_d(va_list argl, t_modif *modi)
 	NEG = nb < 0 ? 1 : 0;
 	nb = NEG == 1 ? -nb : nb;
 	nblen = get_uintlen(nb, BASE_10);
+	if (period_zero(nb, modi))
+		return (LEN);
 	if (PRECI > 0 || DIGIT > 0)
 		width_errors(modi, nblen);
 	if (MINUS)

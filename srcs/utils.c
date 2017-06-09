@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <msakwins@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 00:23:22 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/06/09 15:37:07 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/09 21:30:06 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,9 @@ void	init_all(t_modif *modi)
 	modi->cap = 0;
 	modi->hexa = 0;
 	modi->neg = 0;
+}
+
+int		period_zero(intmax_t nb, t_modif *modi)
+{
+	return (nb == 0 && PERIOD && PRECI == 0);
 }

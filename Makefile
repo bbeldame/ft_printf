@@ -6,7 +6,7 @@
 #    By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/17 19:49:45 by msakwins          #+#    #+#              #
-#    Updated: 2017/06/05 20:50:32 by msakwins         ###   ########.fr        #
+#    Updated: 2017/06/09 21:49:45 by bbeldame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ SRC_NAME = search.c \
 	lenght_mod.c \
 	handle_mod.c \
 	apply_flags.c \
-	utils.c
+	utils.c \
+	handle_bd.c
 
 SRCS = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJS = $(addprefix $(OBJ_PATH)/,$(SRC_NAME:.c=.o))
