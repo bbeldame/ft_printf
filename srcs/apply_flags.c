@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   apply_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/05 19:52:29 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/09 22:10:27 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/10 20:11:33 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 void		width_errors(t_modif *modi, int nblen)
 {
+	if (PRECI > 0)
+		ZERO = 0;
+	if (PLUS || SPACE)
+		DIGIT = DIGIT - 1;
 	if (DIGIT > 0 || PRECI > 0)
 	{
-		DIGIT = DIGIT < nblen ? 0 : DIGIT;
-		PRECI = PRECI < nblen ? 0 : PRECI;
+		DIGIT = DIGIT <= nblen ? 0 : DIGIT;
+		PRECI = PRECI <= nblen ? 0 : PRECI;
 	}
 	if (DIGIT > 0 && PRECI == 0)
 	{
