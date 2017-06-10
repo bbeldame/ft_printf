@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 13:47:12 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/09 21:56:13 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/06/10 20:08:15 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void			search_format(va_list argl, char l, t_modif *modi)
 
 void			handle(char c, va_list argl, t_modif *modi)
 {
-	if (c == 'D' || c == 'O' || c == 'X' || c == 'U')
+	if (c == 'D' || c == 'O' || c == 'X' || c == 'U' || c == 'C')
 		modi->cap = 1;
 	LEN = (c == 'd' || c == 'i' || c == 'D') ? handle_d(argl, modi) : LEN;
 	LEN = (c == 'o' || c == 'O') ? handle_o(argl, modi) : LEN;

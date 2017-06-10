@@ -6,7 +6,7 @@
 /*   By: msakwins <msakwins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 19:39:24 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/09 23:06:40 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/10 20:18:02 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ int			handle_w(va_list argl, t_modif *modi)
 	width_errors(modi, nblen);
 	if (DIGIT > 0)
 		apply_digits(modi);
-	LEN += ft_putwchar(value, size);
+	if (!modi->cap && !modi->mod)
+		LEN += get_charlen(value);
+	else
+		LEN += ft_putwchar(value, size);
 	return (LEN);
 }
 
@@ -47,7 +50,9 @@ int			handle_ws(va_list argl, t_modif *modi)
 	slen = get_wstrlen(wstr);
 	if (PERIOD == 1 || DIGIT > 0)
 	{
-		wlen = PERIOD == 1 && PRECI < slen ? get_preciw(wstr, PRECI) : slen;
+		wlen = PERIOD == 1 && PRECI < slen && PRECI > 0 ? get_preciw(wstr, PRECI) : slen;
+		if (PERIOD == 1 && PRECI == 0)
+			wlen = 0;
 		if (PERIOD == 0 && MINUS)
 			LEN += ft_putwstr(wstr);
 		if (DIGIT > wlen)
@@ -57,7 +62,7 @@ int			handle_ws(va_list argl, t_modif *modi)
 			if (PERIOD == 0 && !MINUS)
 				LEN += ft_putwstr(wstr);
 		}
-		if (PERIOD == 1 && PRECI >= 0 && PRECI <= slen)
+		if (PERIOD == 1 && PRECI > 0 && PRECI <= slen)
 		{
 			LEN += ft_putwnstr(wstr, PRECI);
 		}
