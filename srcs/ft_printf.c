@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 13:47:12 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/10 20:08:15 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/11 18:16:34 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int				parse(va_list argl, const char *format, t_modif *modi)
 			if (modi->percent == 1)
 				return (0);
 			search_format(argl, format[i], modi);
+			free_all(modi);
 		}
 		else
 			LEN += get_charlen(format[i]);

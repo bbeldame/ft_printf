@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 17:26:47 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/10 20:01:23 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/11 18:52:37 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ int				handle_x(va_list argl, t_modif *modi)
 	nb = ulenght_mod(argl, modi);
 	if (modi->mod == 2 && modi->cap == 1)
 		nb = (unsigned char)to_unsigned_char_modulo(nb);
+	if (CAP == 1 && MOD == 0)
+	{
+		nb = (unsigned int)nb;
+	}
 	base = modi->cap == 1 ? HEXA_CAP : HEXA_MIN;
 	nblen = get_uintlen(nb, base);
 	if (modi->sharp && nb > 0)

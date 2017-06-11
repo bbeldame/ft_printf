@@ -6,7 +6,7 @@
 /*   By: msakwins <msakwins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 19:47:02 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/10 20:04:46 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/11 18:51:47 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ intmax_t		lenght_mod(va_list argl, t_modif *modi)
 
 uintmax_t		ulenght_mod(va_list argl, t_modif *modi)
 {
-	uintmax_t nbr;
+	uintmax_t		nbr;
 
 	nbr = va_arg(argl, uintmax_t);
 	if (modi->mod == 1 && modi->cap != 1)
@@ -52,6 +52,8 @@ uintmax_t		ulenght_mod(va_list argl, t_modif *modi)
 	else if (modi->mod == 6)
 		nbr = (size_t)nbr;
 	else
+	{
 		nbr = (unsigned int)nbr;
+	}
 	return (nbr);
 }
