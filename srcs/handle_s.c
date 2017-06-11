@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_s.c                                      :+:      :+:    :+:   */
+/*   handle_s.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:40:54 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/09 22:47:29 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/11 18:31:49 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ size_t		handle_s(va_list argl, t_modif *modi)
 		slen = ft_strlen(str);
 		nblen = PERIOD && PRECI < slen ? PRECI : slen;
 		width_errs(modi, nblen);
-		if (DIGIT)
+		if (DIGIT && !MINUS)
 		{
 			apply_digits(modi);
 		}
@@ -40,6 +40,10 @@ size_t		handle_s(va_list argl, t_modif *modi)
 		{
 			ft_putstr(str);
 			LEN += slen;
+		}
+		if (DIGIT && MINUS)
+		{
+			apply_digits(modi);
 		}
 	}
 	else

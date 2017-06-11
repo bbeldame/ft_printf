@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 19:56:57 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/11 17:33:09 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/11 18:59:59 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,17 @@ int			handle_d(va_list argl, t_modif *modi)
 	nb = NEG == 1 ? -nb : nb;
 	nblen = get_uintlen(nb, BASE_10);
 	if (period_zero(nb, modi))
+	{
+		apply_digits(modi);
 		return (LEN);
+	}
 	if (PRECI > 0 || DIGIT > 0)
 		width_errors(modi, nblen);
 	if (MINUS)
 	{
-		if (NEG)
+		if (NEG && (negatif = 1) == 1)
 			LEN += get_charlen('-');
+		apply_preci(modi);
 		ft_putnbr_base(nb, BASE_10);
 	}
 	if (PLUS || SPACE)
@@ -51,7 +55,7 @@ int			handle_d(va_list argl, t_modif *modi)
 		LEN += get_charlen('-');
 		negatif = 1;
 	}
-	if (PRECI > 0)
+	if (PRECI > 0 && !MINUS)
 	{
 		apply_preci(modi);
 	}

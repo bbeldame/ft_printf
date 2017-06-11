@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 15:46:28 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/11 18:49:00 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/11 19:00:25 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,25 @@ int			handle_u(va_list argl, t_modif *modi)
 	if (SHARP == 1 && nb > 0)
 		LEN += get_charlen('0');
 	if (period_zero(nb, modi))
+	{
+		apply_digits(modi);
 		return (LEN);
+	}
 	if (DIGIT || PRECI)
 		width_errors(modi, nblen);
+	if (MINUS)
+	{
+		apply_preci(modi);
+		ft_putnbr_base(nb, BASE_10);
+	}
 	if (DIGIT > 0)
 	{
 		apply_digits(modi);
 	}
-	if (PRECI > 0)
+	if (PRECI > 0 && !MINUS)
 		apply_preci(modi);
-	ft_putnbr_base(nb, BASE_10);
+	if (!MINUS)
+		ft_putnbr_base(nb, BASE_10);
 	LEN += nblen;
 	return (LEN);
 

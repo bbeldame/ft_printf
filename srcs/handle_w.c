@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_w.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <msakwins@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 19:39:24 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/11 18:47:12 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/11 19:00:34 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,23 @@ int			handle_w(va_list argl, t_modif *modi)
 	size = ft_countbits(value);
 	nblen = size <= 7 ? 1 : size / 8;
 	width_errors(modi, nblen);
+	if (MINUS)
+	{
+		apply_preci(modi);
+		if (!modi->cap && !modi->mod)
+			LEN += get_charlen(value);
+		else
+			LEN += ft_putwchar(value, size);
+	}
 	if (DIGIT > 0)
 		apply_digits(modi);
-	if (!modi->cap && !modi->mod)
-		LEN += get_charlen(value);
-	else
-		LEN += ft_putwchar(value, size);
+	if (!MINUS)
+	{
+		if (!modi->cap && !modi->mod)
+			LEN += get_charlen(value);
+		else
+			LEN += ft_putwchar(value, size);
+	}
 	return (LEN);
 }
 

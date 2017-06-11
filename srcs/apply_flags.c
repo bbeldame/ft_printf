@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/05 19:52:29 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/10 20:11:33 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/06/11 17:34:49 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void		width_errors(t_modif *modi, int nblen)
 {
 	if (PRECI > 0)
 		ZERO = 0;
-	if (PLUS || SPACE)
+	if ((PLUS && !NEG) || SPACE)
 		DIGIT = DIGIT - 1;
 	if (DIGIT > 0 || PRECI > 0)
 	{
@@ -56,9 +56,9 @@ void		apply_flags(t_modif *modi)
 {
 	if (PLUS == 1 && SPACE == 1)
 		SPACE = 0;
-	if (PLUS == 1 && !NEG)
+	if (PLUS == 1 && !NEG && PRECI == 0)
 		LEN += get_charlen('+');
-	if (SPACE == 1 && !NEG)    
+	if (SPACE == 1 && !NEG)
 		LEN += get_charlen(' ');
 }
 
@@ -76,6 +76,8 @@ void		apply_digits(t_modif *modi)
 
 void		apply_preci(t_modif *modi)
 {
+	if (PLUS && !NEG)
+		LEN += get_charlen('+');
 	if (PERIOD)
 	{
 		LEN += padding(PRECI, '0');
