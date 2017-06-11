@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 15:46:28 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/11 19:00:25 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/06/11 21:05:13 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ int			handle_u(va_list argl, t_modif *modi)
 		width_errors(modi, nblen);
 	if (MINUS)
 	{
-		apply_preci(modi);
-		ft_putnbr_base(nb, BASE_10);
+		minus_spec(modi, nb);
 	}
 	if (DIGIT > 0)
 	{

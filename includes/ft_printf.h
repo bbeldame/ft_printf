@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:54:10 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/11 18:52:20 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/11 21:28:43 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ void			width_errs(t_modif *modi, int sblen);
 void			apply_flags(t_modif *modi);
 void			apply_digits(t_modif *modi);
 void			apply_preci(t_modif *modi);
+void			minus_spec(t_modif *modi, uintmax_t nb);
 int				padding(int dig, char p);
 size_t			paddingchar(size_t dig, char p);
 int				ft_putwchar11(unsigned int mask1,
