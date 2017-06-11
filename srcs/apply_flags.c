@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/05 19:52:29 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/11 17:34:49 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/06/11 19:19:08 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void		apply_digits(t_modif *modi)
 	if (MINUS == 1 && ZERO == 1)
 		ZERO = 0;
 	p = ZERO == 1 ? '0' : ' ';
-	if (DIGIT)
+	if (DIGIT > 0)
 		LEN += padding(DIGIT, p);
 }
 
