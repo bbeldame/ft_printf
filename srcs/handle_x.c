@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 17:26:47 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/11 21:01:39 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/22 14:35:49 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 int				handle_x(va_list argl, t_modif *modi)
 {
+	int					ret;
 	size_t				len;
 	uintmax_t			nb;
 	int					nblen;
 	char				*base;
 
+	ret = 0;
 	len = 0;
 	nb = ulenght_mod(argl, modi);
 	if (modi->mod == 2 && modi->cap == 1)
@@ -32,8 +34,8 @@ int				handle_x(va_list argl, t_modif *modi)
 	DIGIT -= (SHARP && nb > 0) ? 2 : 0;
 	if (period_zero(nb, modi))
 	{
-		apply_digits(modi);
-		return (LEN);
+		ret += apply_digits(modi);
+		return (ret);
 	}
 	if (DIGIT || PRECI)
 	{
@@ -42,29 +44,29 @@ int				handle_x(va_list argl, t_modif *modi)
 	if (MINUS)
 	{
 		if (SHARP && nb > 0)
-			LEN += (modi->cap) ? get_strlen("0X") : get_strlen("0x");
+			ret += (modi->cap) ? get_strlen("0X") : get_strlen("0x");
 		ft_putnbr_base(nb, base);
-		apply_digits(modi);
+		ret += apply_digits(modi);
 	}
 	if (PRECI > 0)
 	{
-		apply_digits(modi);
+		ret += apply_digits(modi);
 		if (SHARP && nb > 0)
-			LEN += (modi->cap) ? get_strlen("0X") : get_strlen("0x");
-		apply_preci(modi);
+			ret += (modi->cap) ? get_strlen("0X") : get_strlen("0x");
+		ret += apply_preci(modi);
 	}
 	if (!MINUS)
 	{
 		if (SHARP && nb > 0 && !PRECI && ZERO)
-			LEN += (modi->cap) ? get_strlen("0X") : get_strlen("0x");
+			ret += (modi->cap) ? get_strlen("0X") : get_strlen("0x");
 		if (DIGIT && !PRECI)
-			apply_digits(modi);
+			ret += apply_digits(modi);
 		if (SHARP && nb > 0 && !PRECI && !ZERO)
-			LEN += (modi->cap) ? get_strlen("0X") : get_strlen("0x");
+			ret += (modi->cap) ? get_strlen("0X") : get_strlen("0x");
 		ft_putnbr_base(nb, base);
 	}
-	LEN += nblen;
-	return (LEN);
+	ret += nblen;
+	return (ret);
 }
 
 uintmax_t		to_unsigned_char_modulo(uintmax_t nbr)

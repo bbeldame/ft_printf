@@ -6,17 +6,23 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 13:47:12 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/11 18:16:34 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/22 16:15:31 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int				parse(va_list argl, const char *format, t_modif *modi)
+int				parse(va_list argl, const char *format)
 {
 	int					i;
+	int					ret;
+	t_modif				*modi;
 
 	i = 0;
+	ret = 0;
+	if (!(modi = malloc(sizeof(t_modif))))
+		return (0);
+	init_all(modi);
 	while (format[i])
 	{
 		if (format[i] == '%')
@@ -25,14 +31,15 @@ int				parse(va_list argl, const char *format, t_modif *modi)
 			i = parse_flags(format, i, modi);
 			if (modi->percent == 1)
 				return (0);
-			search_format(argl, format[i], modi);
-			free_all(modi);
+			ret += search_format(argl, format[i], modi);
+			init_all(modi);
 		}
 		else
-			LEN += get_charlen(format[i]);
+			ret += get_charlen(format[i]);
 		i++;
 	}
-	return (LEN);
+	free_all(modi);
+	return (ret);
 }
 
 int				parse_flags(const char *format, int i, t_modif *modi)
@@ -59,52 +66,49 @@ int				parse_flags(const char *format, int i, t_modif *modi)
 	return (i);
 }
 
-void			search_format(va_list argl, char l, t_modif *modi)
+int				search_format(va_list argl, char l, t_modif *modi)
 {
-//	if (l == '%')
-//	{
-//		LEN += (l == '%') ? get_charlen('%') : 0;
-//	}
+	int			ret;
+
+	ret = 0;
 	if (ft_strchr("sSpdDioOuUxXcCb?", l))
 	{
-		handle(l, argl, modi);
+		ret = handle(l, argl, modi);
 	}
 	else
 	{
-		LEN = handle_bd(modi, l);
+		ret += handle_bd(modi, l);
 	}
+	return (ret);
 }
 
-void			handle(char c, va_list argl, t_modif *modi)
+int				handle(char c, va_list argl, t_modif *modi)
 {
+	int			ret;
+
+	ret = 0;
 	if (c == 'D' || c == 'O' || c == 'X' || c == 'U' || c == 'C')
 		modi->cap = 1;
-	LEN = (c == 'd' || c == 'i' || c == 'D') ? handle_d(argl, modi) : LEN;
-	LEN = (c == 'o' || c == 'O') ? handle_o(argl, modi) : LEN;
-	LEN = (c == 'x' || c == 'X') ? handle_x(argl, modi) : LEN;
-	LEN = (c == 'u' || c == 'U') ? handle_u(argl, modi) : LEN;
-	LEN = (c == 'p') ? handle_p(argl, modi) : LEN;
-	LEN = (c == 'c' || c == 'C') ? handle_w(argl, modi) : LEN;
-	LEN = (c == 's' && modi->mod == 0) ? handle_s(argl, modi) : LEN;
-	LEN = (c == 'S' || (c == 's' && modi->mod)) ? handle_ws(argl, modi) : LEN;
-	LEN = (c == 'b') ? handle_b(argl, modi) : LEN;
+	ret = (c == 'd' || c == 'i' || c == 'D') ? handle_d(argl, modi) : ret;
+	ret = (c == 'o' || c == 'O') ? handle_o(argl, modi) : ret;
+	ret = (c == 'x' || c == 'X') ? handle_x(argl, modi) : ret;
+	ret = (c == 'u' || c == 'U') ? handle_u(argl, modi) : ret;
+	ret = (c == 'p') ? handle_p(argl, modi) : ret;
+	ret = (c == 'c' || c == 'C') ? handle_w(argl, modi) : ret;
+	ret = (c == 's' && modi->mod == 0) ? handle_s(argl, modi) : ret;
+	ret = (c == 'S' || (c == 's' && modi->mod)) ? handle_ws(argl, modi) : ret;
+	ret = (c == 'b') ? handle_b(argl, modi) : ret;
+	return (ret);
 }
 
 int				ft_printf(const char *format, ...)
 {
 	va_list				argl;
-	t_modif				*modi;
-	int					len;
+	int					ret;
 	
-	len = 0;
-	if (!(modi = malloc(sizeof(t_modif))))
-		return (0);
-	init_all(modi);
+	ret = 0;
 	va_start(argl, format);
-	LEN = parse(argl, format, modi);
-	len = LEN;
-	init_all(modi);
-	free(modi);
+	ret = parse(argl, format);
 	va_end(argl);
-	return (len);
+	return (ret);
 }

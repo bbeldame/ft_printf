@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/05 19:52:29 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/11 20:57:56 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/22 16:13:46 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,9 @@ void		width_errors(t_modif *modi, int nblen)
 		PRECI = PRECI <= nblen ? 0 : PRECI;
 	}
 	if (DIGIT > 0 && PRECI == 0)
-	{
 		DIGIT = DIGIT - nblen;
-	}
 	else if (PRECI > 0 && DIGIT == 0)
-	{
 		PRECI = PRECI - nblen;
-	}
 	else if (DIGIT > nblen && PRECI > nblen)
 	{
 		DIGIT = DIGIT - PRECI;
@@ -52,34 +48,45 @@ void		width_errs(t_modif *modi, int slen)
 		DIGIT = DIGIT - slen;
 }
 
-void		apply_flags(t_modif *modi)
+int			apply_flags(t_modif *modi)
 {
+	int		ret;
+
+	ret = 0;
 	if (PLUS == 1 && SPACE == 1)
 		SPACE = 0;
 	if (PLUS == 1 && !NEG && PRECI == 0)
-		LEN += get_charlen('+');
+		ret += get_charlen('+');
 	if (SPACE == 1 && !NEG)
-		LEN += get_charlen(' ');
+		ret += get_charlen(' ');
+	return (ret);
 }
 
-void		apply_digits(t_modif *modi)
+int			apply_digits(t_modif *modi)
 {
+	int		ret;
 	char	p;
 
+	ret = 0;
 	DIGIT -= NEG == 1 ? 1 : 0;
 	if (MINUS == 1 && ZERO == 1)
 		ZERO = 0;
 	p = ZERO == 1 ? '0' : ' ';
 	if (DIGIT > 0)
-		LEN += padding(DIGIT, p);
+		ret += padding(DIGIT, p);
+	return (ret);
 }
 
-void		apply_preci(t_modif *modi)
+int			apply_preci(t_modif *modi)
 {
+	int		ret;
+
+	ret = 0;
 	if (PLUS && !NEG)
-		LEN += get_charlen('+');
+		ret += get_charlen('+');
 	if (PERIOD)
 	{
-		LEN += padding(PRECI, '0');
+		ret += padding(PRECI, '0');
 	}
+	return (ret);
 }

@@ -6,54 +6,51 @@
 /*   By: msakwins <msakwins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 19:47:02 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/11 18:51:47 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/21 17:49:00 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-intmax_t		lenght_mod(va_list argl, t_modif *modi)
+intmax_t		lenght_mod(intmax_t nb, t_modif *modi)
 {
-	intmax_t nbr;
-
-	nbr = va_arg(argl, intmax_t);
-	if (modi->mod == 1 && modi->cap != 1)
-		nbr = (short int)nbr;
-	else if (modi->mod == 2 && modi->cap != 1)
-		nbr = (char)nbr;
-	else if (modi->mod == 3 || modi->cap == 1)
-		nbr = (long int)nbr;
-	else if (modi->mod == 4)
-		nbr = (long long int)nbr;
-	else if (modi->mod == 5)
-		nbr = (intmax_t)nbr;
+	if (MOD == 1 && !CAP)
+		return ((short int)nb);
+	else if (MOD == 2 && !CAP)
+		return ((char)nb);
+	else if ((MOD == 3 && !CAP) || (!MOD && CAP == 1))
+		return ((long int)nb);
+	else if ((MOD == 4 && !CAP) || (MOD == 3 && CAP == 1))
+		return ((long long int)nb);
+	else if (MOD == 5 || (MOD == 4 && CAP == 1))
+		return ((intmax_t)nb);
 	else if (modi->mod == 6)
-		nbr = (intmax_t)nbr;
+		return ((long int)nb);
 	else
-		nbr = (int)nbr;
-	return (nbr);
+		return ((int)nb);
+	return (nb);
 }
 
 uintmax_t		ulenght_mod(va_list argl, t_modif *modi)
 {
-	uintmax_t		nbr;
+	uintmax_t	nb;
 
-	nbr = va_arg(argl, uintmax_t);
+	nb = va_arg(argl, uintmax_t);
 	if (modi->mod == 1 && modi->cap != 1)
-		nbr = (unsigned short int)nbr;
+		nb = (unsigned short int)nb;
 	else if (modi->mod == 2 && modi->cap != 1)
-		nbr = (unsigned char)nbr;
+		nb = (unsigned char)nb;
 	else if (modi->mod == 3 || modi->cap == 1)
-		nbr = (unsigned long int)nbr;
+		nb = (unsigned long int)nb;
 	else if (modi->mod == 4)
-		nbr = (unsigned long long int)nbr;
+		nb = (unsigned long long int)nb;
 	else if (modi->mod == 5)
-		nbr = (uintmax_t)nbr;
+		nb = (uintmax_t)nb;
 	else if (modi->mod == 6)
-		nbr = (size_t)nbr;
+		nb = (size_t)nb;
 	else
 	{
-		nbr = (unsigned int)nbr;
+		nb = (unsigned int)nb;
 	}
-	return (nbr);
+	return (nb);
 }

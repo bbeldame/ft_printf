@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 00:23:22 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/06/11 18:18:10 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/22 16:26:49 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	init_all(t_modif *modi)
 {
-	modi->len = 0;
 	modi->mod = 0;
 	modi->flag = 0;
 	modi->plus = 0;

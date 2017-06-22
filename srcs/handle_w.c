@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 19:39:24 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/11 19:00:34 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/06/22 14:30:02 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 int			handle_w(va_list argl, t_modif *modi)
 {
+	int				ret;
 	wchar_t			value;
 	int				size;
 	int				nblen;
 
+	ret = 0;
 	if (modi->mod == 2)
 		modi->mod = 0;
 	value = ulenght_mod(argl, modi);
@@ -26,37 +28,39 @@ int			handle_w(va_list argl, t_modif *modi)
 	width_errors(modi, nblen);
 	if (MINUS)
 	{
-		apply_preci(modi);
+		ret += apply_preci(modi);
 		if (!modi->cap && !modi->mod)
-			LEN += get_charlen(value);
+			ret += get_charlen(value);
 		else
-			LEN += ft_putwchar(value, size);
+			ret += ft_putwchar(value, size);
 	}
 	if (DIGIT > 0)
-		apply_digits(modi);
+		ret += apply_digits(modi);
 	if (!MINUS)
 	{
 		if (!modi->cap && !modi->mod)
-			LEN += get_charlen(value);
+			ret += get_charlen(value);
 		else
-			LEN += ft_putwchar(value, size);
+			ret += ft_putwchar(value, size);
 	}
-	return (LEN);
+	return (ret);
 }
 
 int			handle_ws(va_list argl, t_modif *modi)
 {
+	int				ret;
 	wchar_t			*wstr;
 	int				slen;
 	int				wlen;
 
+	ret = 0;
 	slen = 0;
 	wlen = 0;
 	wstr = va_arg(argl, wchar_t*);
 	if (wstr == NULL)
 	{
-		LEN += get_strlen("(null)");
-		return (LEN);
+		ret += get_strlen("(null)");
+		return (ret);
 	}
 	slen = get_wstrlen(wstr);
 	if (PERIOD == 1 || DIGIT > 0)
@@ -65,20 +69,20 @@ int			handle_ws(va_list argl, t_modif *modi)
 		if (PERIOD == 1 && PRECI == 0)
 			wlen = 0;
 		if (PERIOD == 0 && MINUS)
-			LEN += ft_putwstr(wstr);
+			ret += ft_putwstr(wstr);
 		if (DIGIT > wlen)
 		{
 			DIGIT = DIGIT - wlen;
-			apply_digits(modi);
+			ret += apply_digits(modi);
 			if (PERIOD == 0 && !MINUS)
-				LEN += ft_putwstr(wstr);
+				ret += ft_putwstr(wstr);
 		}
 		if (PERIOD == 1 && PRECI > 0 && PRECI <= slen)
 		{
-			LEN += ft_putwnstr(wstr, PRECI);
+			ret += ft_putwnstr(wstr, PRECI);
 		}
 	}
 	else
-		LEN += ft_putwstr(wstr);
-	return (LEN);
+		ret += ft_putwstr(wstr);
+	return (ret);
 }

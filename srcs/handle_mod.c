@@ -6,7 +6,7 @@
 /*   By: msakwins <msakwins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 19:17:25 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/11 21:04:04 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/22 14:29:10 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,12 @@ int			padding(int dig, char p)
 	return (len);
 }
 
-void		minus_spec(t_modif *modi, uintmax_t nb)
+int			minus_spec(t_modif *modi, uintmax_t nb)
 {
-	apply_preci(modi);
+	int			ret;
+
+	ret = 0;
+	ret += apply_preci(modi);
 	ft_putnbr_base(nb, BASE_10);
+	return (ret);
 }

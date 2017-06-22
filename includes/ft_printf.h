@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:54:10 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/11 21:28:43 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/22 16:35:35 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@
 # define LIGHTCYAN "\033[01;36m"
 # define NONE "\033[0m"
 
-# define LEN modi->len
 # define MOD modi->mod
 # define FLAG modi->flag
 # define PLUS modi->plus
@@ -61,7 +60,6 @@
 
 typedef struct	s_modifiers
 {
-	int			len;
 	int			mod;
 	int			flag;
 	int			plus;
@@ -79,9 +77,9 @@ typedef struct	s_modifiers
 }				t_modif;
 
 int				ft_printf(const char *format, ...);
-int				parse(va_list argl, const char *format, t_modif *modi);
-void			handle(char c, va_list argl, t_modif *modi);
-void			search_format(va_list argl, char l, t_modif *modi);
+int				parse(va_list argl, const char *format);
+int				handle(char c, va_list argl, t_modif *modi);
+int				search_format(va_list argl, char l, t_modif *modi);
 int				parse_flags(const char *format, int i, t_modif *modi);
 void			search_mod(const char *format, int i, t_modif *modi);
 void			search_flag(const char *format, int i, t_modif *modi);
@@ -96,6 +94,7 @@ void			ft_putllnbr(intmax_t nb);
 void			ft_putnbr_base(uintmax_t nb, char *base);
 int				get_intlen(intmax_t nb);
 int				get_uintlen(uintmax_t nb, char *base);
+int				get_intlen(intmax_t nb);
 int				get_charlen(char c);
 int				get_strlen(char *str);
 int				get_wstrlen(wchar_t *wstr);
@@ -106,10 +105,12 @@ void			ft_putnstr(const char *s, size_t n);
 int				ft_putwstr(wchar_t *wstr);
 int				ft_putwnstr(wchar_t *wstr, int n);
 int				ft_countbits(wchar_t value);
-intmax_t		lenght_mod(va_list argl, t_modif *modi);
+intmax_t		lenght_mod(intmax_t nb, t_modif *modi);
 uintmax_t		ulenght_mod(va_list argl, t_modif *modi);
 size_t			handle_s(va_list argl, t_modif *modi);
 int				handle_d(va_list argl, t_modif *modi);
+int				d_flags(t_modif *modi, intmax_t nb, int nblen);
+int				d_width(t_modif *modi);
 int				handle_x(va_list argl, t_modif *modi);
 int				handle_p(va_list argl, t_modif *modi);
 int				handle_o(va_list argl, t_modif *modi);
@@ -119,10 +120,10 @@ int				handle_ws(va_list argl, t_modif *modi);
 int				handle_bd(t_modif *modi, char c);
 void			width_errors(t_modif *modi, int nblen);
 void			width_errs(t_modif *modi, int sblen);
-void			apply_flags(t_modif *modi);
-void			apply_digits(t_modif *modi);
-void			apply_preci(t_modif *modi);
-void			minus_spec(t_modif *modi, uintmax_t nb);
+int				apply_flags(t_modif *modi);
+int				apply_digits(t_modif *modi);
+int				apply_preci(t_modif *modi);
+int				minus_spec(t_modif *modi, uintmax_t nb);
 int				padding(int dig, char p);
 size_t			paddingchar(size_t dig, char p);
 int				ft_putwchar11(unsigned int mask1,
@@ -131,7 +132,7 @@ int				ft_putwchar16(unsigned int mask2,
 		unsigned char octet, wchar_t value);
 int				ft_putwchar32(unsigned int mask3,
 		unsigned char octet, wchar_t value);
-void			init_all(t_modif *modi);
+void			init_all();
 void			free_all(t_modif *modi);
 uintmax_t		to_unsigned_char_modulo(uintmax_t nbr);
 size_t			handle_b(va_list argl, t_modif *modi);

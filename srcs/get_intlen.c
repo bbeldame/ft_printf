@@ -6,7 +6,7 @@
 /*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 17:12:47 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/11 18:38:40 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/06/22 16:27:50 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int			get_clen(int size)
 	int		clen;
 
 	clen = 0;
-
 	clen = size <= 7 ? 1 : clen;
 	clen = (size > 7 && size <= 11) ? 2 : clen;
 	clen = (size > 11 && size <= 16) ? 3 : clen;

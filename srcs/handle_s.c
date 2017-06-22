@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:40:54 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/11 18:31:49 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/06/22 14:26:55 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 size_t		handle_s(va_list argl, t_modif *modi)
 {
+	int			ret;
 	char		*str;
 	int			slen;
 	int			nblen;
 
+	ret = 0;
 	slen = 0;
 	nblen = 0;
 	str = va_arg(argl, char *);
@@ -29,26 +31,26 @@ size_t		handle_s(va_list argl, t_modif *modi)
 		width_errs(modi, nblen);
 		if (DIGIT && !MINUS)
 		{
-			apply_digits(modi);
+			ret += apply_digits(modi);
 		}
 		if (PERIOD == 1 && PRECI >= 0 && PRECI < slen)
 		{
-			LEN += PRECI;
+			ret += PRECI;
 			ft_putnstr(str, PRECI);
 		}
 		else
 		{
 			ft_putstr(str);
-			LEN += slen;
+			ret += slen;
 		}
 		if (DIGIT && MINUS)
 		{
-			apply_digits(modi);
+			ret += apply_digits(modi);
 		}
 	}
 	else
-		LEN += get_strlen(str);
-	return (LEN);
+		ret += get_strlen(str);
+	return (ret);
 }
 
 size_t		paddingchar(size_t dig, char p)
