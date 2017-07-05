@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 13:47:12 by msakwins          #+#    #+#             */
-/*   Updated: 2017/07/01 16:58:59 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/06/22 16:15:31 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,29 @@ int				parse(va_list argl, const char *format)
 {
 	int					i;
 	int					ret;
-	t_modif				modi;
+	t_modif				*modi;
 
 	i = 0;
 	ret = 0;
-	init_all(&modi);
+	if (!(modi = malloc(sizeof(t_modif))))
+		return (0);
+	init_all(modi);
 	while (format[i])
 	{
 		if (format[i] == '%')
 		{
 			i++;
-			i = parse_flags(format, i, &modi);
-			if (modi.percent == 1)
+			i = parse_flags(format, i, modi);
+			if (modi->percent == 1)
 				return (0);
-			ret += search_format(argl, format[i], &modi);
-			init_all(&modi);
+			ret += search_format(argl, format[i], modi);
+			init_all(modi);
 		}
 		else
 			ret += get_charlen(format[i]);
 		i++;
 	}
-	free_all(&modi);
+	free_all(modi);
 	return (ret);
 }
 
