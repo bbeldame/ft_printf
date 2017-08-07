@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 15:46:28 by msakwins          #+#    #+#             */
-/*   Updated: 2017/08/07 20:45:10 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/08/07 20:49:04 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int			handle_u(va_list argl, t_modif *modi)
 		ft_putnbr_base(nb, BASE_10);
 	ret += nblen;
 	return (ret);
-
 }
 
 int			u_flags(uintmax_t nb, t_modif *modi, int nblen)
