@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 17:17:21 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/22 14:36:43 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/08/07 20:32:37 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,20 @@ int			handle_o(va_list argl, t_modif *modi)
 		ret += apply_digits(modi);
 		return (ret);
 	}
+	ret += o_flags(nb, modi, nblen);
+	if (!MINUS)
+		ft_putnbr_base(nb, BASE_8);
+	ret += nblen;
+	return (ret);
+}
+
+int			o_flags(uintmax_t nb, t_modif *modi, int nblen)
+{
+	int		ret;
+
+	ret = 0;
 	if (SHARP)
-	{
 		DIGIT -= 1;
-	}
 	if (PRECI || DIGIT)
 		width_errors(modi, nblen);
 	if (MINUS)
@@ -44,9 +54,7 @@ int			handle_o(va_list argl, t_modif *modi)
 		ft_putnbr_base(nb, BASE_8);
 	}
 	if (PLUS || SPACE)
-	{
 		ret += apply_flags(modi);
-	}
 	if (DIGIT > 0)
 	{
 		ret += apply_digits(modi);
@@ -54,11 +62,6 @@ int			handle_o(va_list argl, t_modif *modi)
 			ret += get_charlen('0');
 	}
 	if (PRECI > 0 && !MINUS)
-	{
 		ret += apply_preci(modi);
-	}
-	if (!MINUS)
-		ft_putnbr_base(nb, BASE_8);
-	ret += nblen;
 	return (ret);
 }
