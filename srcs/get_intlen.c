@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_intlen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 17:12:47 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/22 16:27:50 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/08/07 19:50:09 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int			get_uintlen(uintmax_t nb, char *base)
 	str = itoa_base(nb, base);
 	len = ft_strlen(str);
 	free(str);
+	str = NULL;
 	return (len);
 }
 

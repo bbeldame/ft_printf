@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 18:37:12 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/15 17:20:33 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/08/07 20:11:13 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char			*itoa_base(uintmax_t value, char *base)
 		tmp = tmp / baselen;
 		i++;
 	}
-	if (!(str = (char *)malloc(sizeof(char) * (i + 1))))
+	if (!(str = (char *)malloc(sizeof(char) * (i + 20))))
 		return (NULL);
 	str[i + 1] = '\0';
 	while (i >= 0)
