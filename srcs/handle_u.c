@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 15:46:28 by msakwins          #+#    #+#             */
-/*   Updated: 2017/06/22 14:28:48 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/08/07 20:45:10 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,21 @@ int			handle_u(va_list argl, t_modif *modi)
 		ret += apply_digits(modi);
 		return (ret);
 	}
+	ret += u_flags(nb, modi, nblen);
+	if (PRECI > 0 && !MINUS)
+		ret += apply_preci(modi);
+	if (!MINUS)
+		ft_putnbr_base(nb, BASE_10);
+	ret += nblen;
+	return (ret);
+
+}
+
+int			u_flags(uintmax_t nb, t_modif *modi, int nblen)
+{
+	int					ret;
+
+	ret = 0;
 	if (DIGIT || PRECI)
 		width_errors(modi, nblen);
 	if (MINUS)
@@ -42,11 +57,5 @@ int			handle_u(va_list argl, t_modif *modi)
 	{
 		ret += apply_digits(modi);
 	}
-	if (PRECI > 0 && !MINUS)
-		ret += apply_preci(modi);
-	if (!MINUS)
-		ft_putnbr_base(nb, BASE_10);
-	ret += nblen;
 	return (ret);
-
 }

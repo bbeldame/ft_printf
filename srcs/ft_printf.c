@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 13:47:12 by msakwins          #+#    #+#             */
-/*   Updated: 2017/08/07 20:15:23 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/08/07 20:43:34 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int				ft_printf(const char *format, ...)
 {
 	va_list				argl;
 	int					ret;
-	
+
 	ret = 0;
 	va_start(argl, format);
 	ret = parse(argl, format);
