@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:54:10 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/07 20:41:31 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/12 16:53:47 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ char			*itoa_base(uintmax_t n, char *base);
 char			*ft_strchr(const char *str, int c);
 int				ft_putwchar(wchar_t value, int size);
 char			*ft_strdup(const char *s1);
-void			ft_putllnbr(intmax_t nb);
 void			ft_putnbr_base(uintmax_t nb, char *base);
 int				get_intlen(intmax_t nb);
 int				get_uintlen(uintmax_t nb, char *base);
