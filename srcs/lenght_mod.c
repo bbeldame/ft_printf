@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 19:47:02 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/06/21 17:49:00 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/19 18:56:18 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,3 @@ uintmax_t		ulenght_mod(va_list argl, t_modif *modi)
 	}
 	return (nb);
 }
-
