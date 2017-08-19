@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:54:10 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/12 17:54:48 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/19 21:21:03 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,6 @@ void			free_all(t_modif *modi);
 uintmax_t		to_unsigned_char_modulo(uintmax_t nbr);
 size_t			handle_b(va_list argl, t_modif *modi);
 int				period_zero(uintmax_t nb, t_modif *modi);
+int				char_before_next_percent(const char *str, int index);
 
 #endif

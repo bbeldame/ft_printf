@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 13:47:12 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/19 19:40:00 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/19 21:44:02 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int				parse(va_list argl, const char *format)
 	int					i;
 	int					ret;
 	t_modif				modi;
+	int					tmp;
 
 	i = 0;
 	ret = 0;
@@ -32,7 +33,11 @@ int				parse(va_list argl, const char *format)
 			ret += search_format(argl, format[i], &modi);
 		}
 		else
-			ret += get_charlen(format[i]);
+		{
+			tmp = char_before_next_percent(format, i);
+			ret += tmp;
+			i += tmp - 1;
+		}
 		i++;
 	}
 	return (ret);

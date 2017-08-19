@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 00:23:22 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/06/22 16:26:49 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/19 21:44:03 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,15 @@ void	free_all(t_modif *modi)
 int		period_zero(uintmax_t nb, t_modif *modi)
 {
 	return (nb == 0 && PERIOD && PRECI == 0);
+}
+
+int		char_before_next_percent(const char *str, int index)
+{
+	int		i;
+
+	i = 0;
+	while (str[index + i] != '%' && str[index + i] != '\0')
+		i++;
+	write(1, str + index, i);
+	return (i);
 }
