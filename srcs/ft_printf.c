@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 13:47:12 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/07 20:43:34 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/12 17:36:58 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int				parse(va_list argl, const char *format)
 		if (format[i] == '%')
 		{
 			i++;
-			i = parse_flags(format, i, &modi);
+			i = parse_flags(argl, format, i, &modi);
 			if (modi.percent == 1)
 				return (0);
 			ret += search_format(argl, format[i], &modi);
@@ -38,16 +38,19 @@ int				parse(va_list argl, const char *format)
 	return (ret);
 }
 
-int				parse_flags(const char *format, int i, t_modif *modi)
+int				parse_flags(va_list argl, const char *format,
+					int i, t_modif *modi)
 {
 	search_flag(format, i, modi);
 	i += (modi->flag > 0) ? modi->flag : 0;
-	i += search_digit(format, i, modi);
+	i += search_digit(argl, format, i, modi);
+	if (format[i] == '*' || ft_isdigit(format[i]))
+		i += search_digit(argl, format, i, modi);
 	if (format[i] == '.')
 	{
 		i++;
 		PERIOD = 1;
-		i += search_period(format, i, modi);
+		i += search_period(argl, format, i, modi);
 	}
 	search_mod(format, i, modi);
 	i += (modi->mod > 0) ? 1 : 0;

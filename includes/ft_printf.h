@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:54:10 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/12 16:53:47 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/12 17:54:48 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,6 @@
 # define BASE_10 "0123456789"
 # define BASE_8 "01234567"
 # define BASE_2 "01"
-# define BLACK "\033[22;30m"
-# define WHITE "\033[01;37m"
-# define GRAY "\033[22;37m"
-# define DARKGRAY "\033[01;30m"
-# define YELLOW "\033[01;33m"
-# define BLUE "\033[22;34m"
-# define LIGHTBLUE "\033[01;34m"
-# define MAGENTA "\033[22;35m"
-# define LIGHTMAGENTA "\033[01;35m"
-# define RED "\033[22;31m"
-# define LIGHTRED "\033[01;31m"
-# define GREEN "\033[22;32m"
-# define LIGHTGREEN "\033[01;32m"
-# define CYAN "\033[22;36m"
-# define LIGHTCYAN "\033[01;36m"
-# define NONE "\033[0m"
 
 # define MOD modi->mod
 # define FLAG modi->flag
@@ -80,11 +64,14 @@ int				ft_printf(const char *format, ...);
 int				parse(va_list argl, const char *format);
 int				handle(char c, va_list argl, t_modif *modi);
 int				search_format(va_list argl, char l, t_modif *modi);
-int				parse_flags(const char *format, int i, t_modif *modi);
+int				parse_flags(va_list argl,
+					const char *format, int i, t_modif *modi);
 void			search_mod(const char *format, int i, t_modif *modi);
 void			search_flag(const char *format, int i, t_modif *modi);
-int				search_digit(const char *format, int i, t_modif *modi);
-int				search_period(const char *format, int i, t_modif *modi);
+int				search_digit(va_list argl, const char *format,
+					int i, t_modif *modi);
+int				search_period(va_list argl, const char *format,
+					int i, t_modif *modi);
 int				search_percent(const char *format, int i, t_modif *modi);
 char			*itoa_base(uintmax_t n, char *base);
 char			*ft_strchr(const char *str, int c);

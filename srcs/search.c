@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 17:05:55 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/06/15 16:48:13 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/12 17:42:25 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,24 @@ void		search_flag(const char *format, int i, t_modif *modi)
 	}
 }
 
-int			search_digit(const char *format, int i, t_modif *modi)
+int			search_digit(va_list argl, const char *format, int i, t_modif *modi)
 {
 	char	*str;
 	int		len;
+	int		star_handler;
 
 	DIGIT = 0;
 	if (!ft_isdigit(format[i]))
+	{
+		if (format[i] == '*')
+		{
+			star_handler = (int)va_arg(argl, uintmax_t);
+			DIGIT = (star_handler >= 0) ? star_handler : -star_handler;
+			MINUS = (star_handler >= 0) ? 0 : 1;
+			return (1);
+		}
 		return (0);
+	}
 	DIGIT = ft_atoi(format + i);
 	str = ft_itoa(DIGIT);
 	len = ft_strlen(str);
@@ -82,14 +92,25 @@ int			search_digit(const char *format, int i, t_modif *modi)
 	return (len);
 }
 
-int			search_period(const char *format, int i, t_modif *modi)
+int			search_period(va_list argl, const char *format,
+				int i, t_modif *modi)
 {
 	char	*str;
 	int		len;
+	int		star_handler;
 
 	PRECI = 0;
 	if (!ft_isdigit(format[i]))
+	{
+		if (format[i] == '*')
+		{
+			star_handler = (int)va_arg(argl, uintmax_t);
+			PRECI = (star_handler >= 0) ? star_handler : 0;
+			PERIOD = (star_handler >= 0) ? 1 : 0;
+			return (1);
+		}
 		return (0);
+	}
 	PRECI = ft_atoi(format + i);
 	str = ft_itoa(PRECI);
 	len = ft_strlen(str);
