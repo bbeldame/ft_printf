@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 17:12:47 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/07 19:50:09 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/19 19:19:26 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 
 int			get_uintlen(uintmax_t nb, char *base)
 {
-	int		len;
-	char	*str;
+	int					len;
+	unsigned int		baselen;
 
-	str = itoa_base(nb, base);
-	len = ft_strlen(str);
-	free(str);
-	str = NULL;
+	len = 1;
+	baselen = ft_strlen(base);
+	while (nb >= baselen)
+	{
+		nb = nb / baselen;
+		len++;
+	}
 	return (len);
 }
 
