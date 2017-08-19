@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 17:05:55 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/12 17:42:25 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/19 19:25:00 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void		search_flag(const char *format, int i, t_modif *modi)
 
 int			search_digit(va_list argl, const char *format, int i, t_modif *modi)
 {
-	char	*str;
 	int		len;
 	int		star_handler;
 
@@ -86,16 +85,13 @@ int			search_digit(va_list argl, const char *format, int i, t_modif *modi)
 		return (0);
 	}
 	DIGIT = ft_atoi(format + i);
-	str = ft_itoa(DIGIT);
-	len = ft_strlen(str);
-	free(str);
+	len = get_uintlen(DIGIT, BASE_10);
 	return (len);
 }
 
 int			search_period(va_list argl, const char *format,
 				int i, t_modif *modi)
 {
-	char	*str;
 	int		len;
 	int		star_handler;
 
@@ -112,8 +108,6 @@ int			search_period(va_list argl, const char *format,
 		return (0);
 	}
 	PRECI = ft_atoi(format + i);
-	str = ft_itoa(PRECI);
-	len = ft_strlen(str);
-	free(str);
+	len = get_uintlen(PRECI, BASE_10);
 	return (len);
 }
