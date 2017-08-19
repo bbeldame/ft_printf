@@ -1,44 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_s.c                                      :+:      :+:    :+:   */
+/*   handle_s.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/27 19:40:54 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/31 20:11:09 by msakwins         ###   ########.fr       */
+/*   Created: 2017/02/27 19:40:54 by bbeldame          #+#    #+#             */
+/*   Updated: 2017/08/07 20:40:44 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-size_t		handle_s(va_list argl, t_modif *modi)
+static int	handle_period_or_digit(t_modif *modi, char *str)
 {
-	char		*str;
-	size_t		len;
-	size_t		slen;
+	int		ret;
+	int		slen;
+	int		nblen;
 
-	len = 0;
+	ret = 0;
 	slen = 0;
-	str = va_arg(argl, char *);
-	str = str == NULL ? "(null)" : str;
-	if (modi->period || modi->digit)
+	nblen = 0;
+	slen = ft_strlen(str);
+	nblen = PERIOD && PRECI < slen ? PRECI : slen;
+	width_errs(modi, nblen);
+	if (DIGIT && !MINUS)
+		ret += apply_digits(modi);
+	if (PERIOD == 1 && PRECI >= 0 && PRECI < slen)
 	{
-		slen = ft_strlen(str);
-		slen = modi->period < slen ? modi->period : slen;
-		modi->digit -= modi->digit < slen ? modi->digit : 0;
-		len += modi->digit ? paddingchar(modi->digit - slen, ' ') : 0;
-		if (modi->period)
-		{
-			if (modi->period > slen)
-				return (len += get_strlen(str));
-			ft_putnstr(str, modi->period);
-			len += modi->period;
-		}
+		ret += PRECI;
+		ft_putnstr(str, PRECI);
 	}
 	else
-		len = get_strlen(str);
-	return (len);
+	{
+		ft_putstr(str);
+		ret += slen;
+	}
+	if (DIGIT && MINUS)
+		ret += apply_digits(modi);
+	return (ret);
+}
+
+size_t		handle_s(va_list argl, t_modif *modi)
+{
+	int			ret;
+	char		*str;
+
+	ret = 0;
+	str = va_arg(argl, char *);
+	str = str == NULL ? "(null)" : str;
+	if (PERIOD || DIGIT)
+		ret += handle_period_or_digit(modi, str);
+	else
+		ret += get_strlen(str);
+	return (ret);
 }
 
 size_t		paddingchar(size_t dig, char p)

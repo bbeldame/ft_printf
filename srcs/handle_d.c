@@ -5,55 +5,79 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/25 19:56:57 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/31 20:09:49 by msakwins         ###   ########.fr       */
+/*   Created: 2017/03/25 19:56:57 by bbeldame          #+#    #+#             */
+/*   Updated: 2017/06/22 16:40:45 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-size_t			handle_d(va_list argl, t_modif *modi)
+int			handle_d(va_list argl, t_modif *modi)
 {
-	size_t			len;
+	int				ret;
 	intmax_t		nb;
-	size_t			neg;
-	size_t			nblen;
+	int				nblen;
 
-	len = 0;
-	nb = lenght_mod(argl, modi);
-	neg = nb < 0 ? 1 : 0;
-	nb = neg == 1 ? -nb : nb;
+	ret = 0;
+	nb = va_arg(argl, intmax_t);
+	nb = lenght_mod(nb, modi);
+	NEG = nb < 0 ? 1 : 0;
+	nb = NEG == 1 ? -nb : nb;
 	nblen = get_uintlen(nb, BASE_10);
-	if (modi->flag || modi->period > nblen || modi->digit > nblen)
-		len += diouflag(nb, modi, neg, BASE_10);
-	else
+	if (period_zero(nb, modi))
 	{
-		if (modi->preci && !modi->period)
-		{
-			return (len);
-		}
-		if (neg)
-		{
-			len += get_charlen('-');
-		}
-		ft_putllnbr(nb);
+		ret += apply_digits(modi);
+		return (ret);
 	}
-	len += nblen;
-	return (len);
+	ret += d_flags(modi, nb, nblen);
+	ret += d_width(modi);
+	if (NEG == 1 && !ZERO && !PRECI && !MINUS)
+		ret += get_charlen('-');
+	if (!MINUS)
+		ft_putnbr_base(nb, BASE_10);
+	ret += nblen;
+	return (ret);
 }
 
-size_t			handflag(t_modif *modi)
+int			d_flags(t_modif *modi, intmax_t nb, int nblen)
 {
-	size_t			len;
+	int				ret;
 
-	len = 0;
-	if (modi->plus == 1 && modi->space == 1)
-		modi->space = 0;
-	if (modi->plus == 1 && (!modi->preci || modi->minus))
+	ret = 0;
+	if (PRECI > 0 || DIGIT > 0)
+		width_errors(modi, nblen);
+	if (MINUS)
 	{
-		len += get_charlen('+');
+		if (NEG)
+			ret += get_charlen('-');
+		ret += apply_preci(modi);
+		ft_putnbr_base(nb, BASE_10);
 	}
-	if (modi->space == 1)
-		len += get_charlen(' ');
-	return (len);
+	if (PLUS || SPACE)
+		ret += apply_flags(modi);
+	return (ret);
+}
+
+int			d_width(t_modif *modi)
+{
+	int				ret;
+	int				negatif;
+
+	ret = 0;
+	negatif = 0;
+	if ((ZERO == 1) && NEG == 1)
+	{
+		ret += get_charlen('-');
+		negatif = 1;
+	}
+	if (DIGIT > 0)
+		ret += apply_digits(modi);
+	if (NEG == 1 && !negatif && PRECI > 0)
+	{
+		ret += get_charlen('-');
+		negatif = 1;
+	}
+	if (PRECI > 0 && !MINUS)
+		ret += apply_preci(modi);
+	return (ret);
 }

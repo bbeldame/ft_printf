@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putllnbr.c                                      :+:      :+:    :+:   */
+/*   handle_bd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/05 16:09:29 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/29 15:48:31 by msakwins         ###   ########.fr       */
+/*   Created: 2017/04/01 15:46:28 by bbeldame          #+#    #+#             */
+/*   Updated: 2017/06/22 14:25:20 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void		ft_putllnbr(intmax_t nb)
+/*
+** Handle some bad behavior
+** Bad format
+*/
+
+int			handle_bd(t_modif *modi, char c)
 {
-	if (nb == LONG_MIN)
-		ft_putstr("9223372036854775808");
-	else if (nb < 0)
+	int		ret;
+
+	ret = 0;
+	if (MINUS)
 	{
-		ft_putchar('-');
-		ft_putllnbr(-nb);
+		ret += get_charlen(c);
 	}
-	else if (nb >= 10)
+	if (DIGIT > 0)
 	{
-		ft_putllnbr(nb / 10);
-		ft_putllnbr(nb % 10);
+		if (ZERO)
+			ret += padding(DIGIT - 1, '0');
+		else
+			ret += padding(DIGIT - 1, ' ');
 	}
-	else
+	if (!MINUS)
 	{
-		ft_putchar(nb + '0');
+		ret += get_charlen(c);
 	}
+	return (ret);
 }

@@ -1,37 +1,60 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_p.c                                      :+:      :+:    :+:   */
+/*   handle_p.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/11 17:41:39 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/31 20:11:02 by msakwins         ###   ########.fr       */
+/*   Created: 2017/03/11 17:41:39 by bbeldame          #+#    #+#             */
+/*   Updated: 2017/08/07 20:46:10 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-size_t		handle_p(va_list argl, t_modif *modi)
+static int	handle_flags(t_modif *modi, uintmax_t nb, int nblen)
 {
-	uintmax_t		nb;
-	size_t			len;
-	size_t			nblen;
+	int ret;
 
-	len = 0;
-	modi->hexa = 1;
-	nb = (uintmax_t)va_arg(argl, void*);
-	nblen = get_uintlen(nb, BASE_10);
-	modi->digit -= 2;
-	if (modi->minus)
-		len += get_strlen("0x");
-	if (modi->flag || modi->period > nblen || modi->digit > nblen)
-		len += diouflag(nb, modi, 0, HEXA_MIN);
-	if (!modi->minus)
+	ret = 0;
+	if (PRECI || DIGIT)
+		width_errors(modi, nblen);
+	if (SHARP == 1 && nb > 0)
+		ret += get_charlen('0');
+	if (MINUS || ZERO)
 	{
-		len += get_strlen("0x");
+		ret += get_strlen("0x");
 		ft_putnbr_base(nb, HEXA_MIN);
 	}
-	len += get_uintlen(nb, HEXA_MIN);
-	return (len);
+	if (DIGIT > 0)
+	{
+		ret += apply_digits(modi);
+	}
+	if (!MINUS && !ZERO)
+		ret += get_strlen("0x");
+	if (PRECI > 0)
+		ret += apply_preci(modi);
+	if (!MINUS && !ZERO)
+		ft_putnbr_base(nb, HEXA_MIN);
+	ret += get_uintlen(nb, HEXA_MIN);
+	return (ret);
+}
+
+int			handle_p(va_list argl, t_modif *modi)
+{
+	int				ret;
+	uintmax_t		nb;
+	int				nblen;
+
+	ret = 0;
+	modi->hexa = 1;
+	nb = (uintmax_t)va_arg(argl, void*);
+	nblen = get_uintlen(nb, HEXA_MIN);
+	DIGIT -= 2;
+	PLUS = 0;
+	SPACE = 0;
+	if (period_zero(nb, modi))
+		return (ret + get_strlen("0x"));
+	ret += handle_flags(modi, nb, nblen);
+	return (ret);
 }

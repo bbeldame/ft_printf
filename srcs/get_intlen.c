@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_intlen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/25 17:12:47 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/29 15:49:01 by msakwins         ###   ########.fr       */
+/*   Created: 2017/03/25 17:12:47 by bbeldame          #+#    #+#             */
+/*   Updated: 2017/08/07 19:50:09 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int			get_uintlen(uintmax_t nb, char *base)
 	str = itoa_base(nb, base);
 	len = ft_strlen(str);
 	free(str);
+	str = NULL;
 	return (len);
 }
 
@@ -36,4 +37,32 @@ int			get_strlen(char *str)
 	ft_putstr(str);
 	len = ft_strlen(str);
 	return (len);
+}
+
+int			get_clen(int size)
+{
+	int		clen;
+
+	clen = 0;
+	clen = size <= 7 ? 1 : clen;
+	clen = (size > 7 && size <= 11) ? 2 : clen;
+	clen = (size > 11 && size <= 16) ? 3 : clen;
+	clen = (size > 16 && size <= 32) ? 4 : clen;
+	return (clen);
+}
+
+int			get_wstrlen(wchar_t *wstr)
+{
+	int		size;
+	int		wlen;
+
+	wlen = 0;
+	size = 0;
+	while (*wstr != '\0')
+	{
+		size = ft_countbits(*wstr);
+		wlen += get_clen(size);
+		wstr++;
+	}
+	return (wlen);
 }

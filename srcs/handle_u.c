@@ -3,36 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   handle_u.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/01 15:46:28 by msakwins          #+#    #+#             */
-/*   Updated: 2017/05/31 20:11:35 by msakwins         ###   ########.fr       */
+/*   Created: 2017/04/01 15:46:28 by bbeldame          #+#    #+#             */
+/*   Updated: 2017/08/07 20:49:04 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-size_t		handle_u(va_list argl, t_modif *modi)
+int			handle_u(va_list argl, t_modif *modi)
 {
+	int					ret;
 	uintmax_t			nb;
-	size_t				len;
-	size_t				nblen;
-	size_t				neg;
+	int					nblen;
+	int					neg;
 
+	ret = 0;
 	neg = 0;
-	len = 0;
 	nb = ulenght_mod(argl, modi);
 	nblen = get_uintlen(nb, BASE_10);
-	modi->plus = modi->plus == 1 ? 0 : 0;
-	modi->space = modi->space ? 0 : 0;
-	if (modi->flag || modi->digit > nblen || modi->period > nblen)
-		len += diouflag(nb, modi, 0, BASE_10);
-	else
+	PLUS = 0;
+	SPACE = 0;
+	if (SHARP == 1 && nb > 0)
+		ret += get_charlen('0');
+	if (period_zero(nb, modi))
 	{
-		if (modi->preci && !modi->period)
-			return (len);
-		ft_putnbr_base(nb, BASE_10);
+		ret += apply_digits(modi);
+		return (ret);
 	}
-	len += nblen;
-	return (len);
+	ret += u_flags(nb, modi, nblen);
+	if (PRECI > 0 && !MINUS)
+		ret += apply_preci(modi);
+	if (!MINUS)
+		ft_putnbr_base(nb, BASE_10);
+	ret += nblen;
+	return (ret);
+}
+
+int			u_flags(uintmax_t nb, t_modif *modi, int nblen)
+{
+	int					ret;
+
+	ret = 0;
+	if (DIGIT || PRECI)
+		width_errors(modi, nblen);
+	if (MINUS)
+	{
+		ret += minus_spec(modi, nb);
+	}
+	if (DIGIT > 0)
+	{
+		ret += apply_digits(modi);
+	}
+	return (ret);
 }

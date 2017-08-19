@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/02/17 19:49:45 by msakwins          #+#    #+#              #
-#    Updated: 2017/05/31 20:20:43 by bbeldame         ###   ########.fr        #
+#    Created: 2017/02/17 19:49:45 by bbeldame          #+#    #+#              #
+#    Updated: 2017/08/12 16:53:54 by bbeldame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ LIBFT = $(addprefix $(LIBFT_PATH)/,$(LIBFTA))
 SRC_NAME = search.c \
 	ft_putwchar.c \
 	ft_putwstr.c \
-	ft_putllnbr.c \
 	ft_printf.c \
 	ft_putnstr.c \
 	get_intlen.c \
@@ -40,7 +39,9 @@ SRC_NAME = search.c \
 	ft_countbits.c \
 	lenght_mod.c \
 	handle_mod.c \
-	utils.c
+	apply_flags.c \
+	utils.c \
+	handle_bd.c
 
 SRCS = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJS = $(addprefix $(OBJ_PATH)/,$(SRC_NAME:.c=.o))

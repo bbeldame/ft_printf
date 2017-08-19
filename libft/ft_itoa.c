@@ -3,47 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/12 16:33:54 by msakwins          #+#    #+#             */
-/*   Updated: 2017/04/13 20:07:54 by msakwins         ###   ########.fr       */
+/*   Created: 2016/11/09 20:56:27 by bbeldame          #+#    #+#             */
+/*   Updated: 2017/08/07 20:39:02 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "libft.h"
 
-static void		itoa_neg(intmax_t *n, int *negative)
+static int	digitscount(int n)
 {
-	if (*n < 0)
+	int				size;
+	unsigned int	nb;
+
+	size = 0;
+	if (n < 0)
 	{
-		*n *= -1;
-		*negative = 1;
+		nb = -n;
+		size++;
 	}
+	else
+		nb = n;
+	while (nb > 9)
+	{
+		nb = nb / 10;
+		size++;
+	}
+	size++;
+	return (size);
 }
 
-char			*ft_itoa(intmax_t n)
+char		*ft_itoa(int n)
 {
-	intmax_t		ntmp;
-	int				len;
-	int				neg;
 	char			*str;
+	int				i;
+	unsigned int	nb;
+	int				minus;
 
-	ntmp = n;
-	len = 2;
-	neg = 0;
-	itoa_neg(&n, &neg);
-	while (ntmp /= 10)
-		len++;
-	len += neg;
-	if ((str = (char*)malloc(sizeof(char) * len)) == NULL)
+	minus = 0;
+	if (!(str = (char *)malloc(sizeof(char) * digitscount(n) + 1)))
 		return (NULL);
-	str[--len] = '\0';
-	while (len--)
+	i = digitscount(n);
+	if (n < 0)
 	{
-		str[len] = n % 10 + '0';
-		n = n / 10;
+		minus = 1;
+		nb = -n;
 	}
-	if (neg)
-		str[0] = '-';
+	else
+		nb = n;
+	str[i--] = '\0';
+	while (nb >= 10)
+	{
+		str[i--] = 48 + nb % 10;
+		nb = nb / 10;
+	}
+	str[i--] = 48 + nb;
+	str[i] = (minus) ? '-' : str[i];
 	return (str);
 }
