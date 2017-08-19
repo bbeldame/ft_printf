@@ -6,13 +6,13 @@
 #    By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/12 18:06:34 by bbeldame          #+#    #+#              #
-#    Updated: 2017/05/17 23:15:25 by bbeldame         ###   ########.fr        #
+#    Updated: 2017/08/19 20:27:43 by bbeldame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-CFLAGS = -c -Wall -Wextra -Werror
+CFLAGS = -c -Wall -Wextra -Werror -O3
 
 NAME =	libft.a
 

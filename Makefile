@@ -6,13 +6,13 @@
 #    By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/17 19:49:45 by bbeldame          #+#    #+#              #
-#    Updated: 2017/08/12 16:53:54 by bbeldame         ###   ########.fr        #
+#    Updated: 2017/08/19 20:24:46 by bbeldame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -O3
 
 INC = includes
 

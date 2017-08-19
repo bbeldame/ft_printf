@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 17:12:47 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/19 19:19:26 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/08/19 20:23:13 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			get_uintlen(uintmax_t nb, char *base)
 
 int			get_charlen(char c)
 {
-	ft_putchar(c);
+	write(1, &c, 1);
 	return (1);
 }
 

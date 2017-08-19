@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 13:47:12 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/12 17:36:58 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/19 19:40:00 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,21 +83,27 @@ int				search_format(va_list argl, char l, t_modif *modi)
 
 int				handle(char c, va_list argl, t_modif *modi)
 {
-	int			ret;
-
-	ret = 0;
 	if (c == 'D' || c == 'O' || c == 'X' || c == 'U' || c == 'C')
 		modi->cap = 1;
-	ret = (c == 'd' || c == 'i' || c == 'D') ? handle_d(argl, modi) : ret;
-	ret = (c == 'o' || c == 'O') ? handle_o(argl, modi) : ret;
-	ret = (c == 'x' || c == 'X') ? handle_x(argl, modi) : ret;
-	ret = (c == 'u' || c == 'U') ? handle_u(argl, modi) : ret;
-	ret = (c == 'p') ? handle_p(argl, modi) : ret;
-	ret = (c == 'c' || c == 'C') ? handle_w(argl, modi) : ret;
-	ret = (c == 's' && modi->mod == 0) ? handle_s(argl, modi) : ret;
-	ret = (c == 'S' || (c == 's' && modi->mod)) ? handle_ws(argl, modi) : ret;
-	ret = (c == 'b') ? handle_b(argl, modi) : ret;
-	return (ret);
+	if (c == 'd' || c == 'i' || c == 'D')
+		return (handle_d(argl, modi));
+	else if (c == 'o' || c == 'O')
+		return (handle_o(argl, modi));
+	else if (c == 'x' || c == 'X')
+		return (handle_x(argl, modi));
+	else if (c == 'u' || c == 'U')
+		return (handle_u(argl, modi));
+	else if (c == 'p')
+		return (handle_p(argl, modi));
+	else if (c == 'c' || c == 'C')
+		return (handle_w(argl, modi));
+	else if (c == 's' && modi->mod == 0)
+		return (handle_s(argl, modi));
+	else if (c == 'S' || (c == 's' && modi->mod))
+		return (handle_ws(argl, modi));
+	else if (c == 'b')
+		return (handle_b(argl, modi));
+	return (0);
 }
 
 int				ft_printf(const char *format, ...)
