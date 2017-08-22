@@ -6,13 +6,13 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 19:39:24 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/21 18:30:20 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/08/22 21:13:50 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static int	handle_w_minus(t_modif *modi, wchar_t value, int size)
+static int	handle_w_minus(t_modif *modi, wchar_t value)
 {
 	int ret;
 
@@ -21,7 +21,7 @@ static int	handle_w_minus(t_modif *modi, wchar_t value, int size)
 	if (!modi->cap && !modi->mod)
 		ret += get_charlen(value);
 	else
-		ret += ft_putwchar(value, size);
+		ret += ft_putwchar(value);
 	return (ret);
 }
 
@@ -37,12 +37,12 @@ int			handle_w(va_list argl, t_modif *modi)
 		modi->mod = 0;
 	value = ulenght_mod(argl, modi);
 	size = ft_countbits(value);
-	nblen = size <= 7 ? 1 : size / 8;
+	nblen = size;
 	if (PRECI || PERIOD || FLAG || DIGIT)
 	{
 		width_errors(modi, nblen);
 		if (MINUS)
-			ret += handle_w_minus(modi, value, size);
+			ret += handle_w_minus(modi, value);
 		if (DIGIT > 0)
 			ret += apply_digits(modi);
 	}
@@ -53,7 +53,7 @@ int			handle_w(va_list argl, t_modif *modi)
 		else if (!modi->cap && !modi->mod)
 			ret += get_charlen(value);
 		else
-			ret += ft_putwchar(value, size);
+			ret += ft_putwchar(value);
 	}
 	return (ret);
 }

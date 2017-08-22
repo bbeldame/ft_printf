@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:54:10 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/19 21:21:03 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/22 21:07:41 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdarg.h>
 # include <limits.h>
 # include <stdarg.h>
+# include <wchar.h>
 # include <stdint.h>
 # include <locale.h>
 # include <inttypes.h>
@@ -75,7 +76,7 @@ int				search_period(va_list argl, const char *format,
 int				search_percent(const char *format, int i, t_modif *modi);
 char			*itoa_base(uintmax_t n, char *base);
 char			*ft_strchr(const char *str, int c);
-int				ft_putwchar(wchar_t value, int size);
+int				ft_putwchar(wchar_t value);
 char			*ft_strdup(const char *s1);
 void			ft_putnbr_base(uintmax_t nb, char *base);
 int				get_intlen(intmax_t nb);
@@ -85,7 +86,6 @@ int				get_charlen(char c);
 int				get_strlen(char *str);
 int				get_wstrlen(wchar_t *wstr);
 int				get_preciw(wchar_t *wstr, int n);
-int				get_clen(int size);
 int				get_octlen(uintmax_t nb);
 void			ft_putnstr(const char *s, size_t n);
 int				ft_putwstr(wchar_t *wstr);
@@ -114,12 +114,6 @@ int				apply_preci(t_modif *modi);
 int				minus_spec(t_modif *modi, uintmax_t nb);
 int				padding(int dig, char p);
 size_t			paddingchar(size_t dig, char p);
-int				ft_putwchar11(unsigned int mask1,
-		unsigned char octet, wchar_t value);
-int				ft_putwchar16(unsigned int mask2,
-		unsigned char octet, wchar_t value);
-int				ft_putwchar32(unsigned int mask3,
-		unsigned char octet, wchar_t value);
 void			init_all();
 void			free_all(t_modif *modi);
 uintmax_t		to_unsigned_char_modulo(uintmax_t nbr);

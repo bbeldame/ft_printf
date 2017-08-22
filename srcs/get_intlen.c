@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 17:12:47 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/22 19:53:22 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/08/22 21:05:27 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,31 +42,15 @@ int			get_strlen(char *str)
 	return (len);
 }
 
-int			get_clen(int size)
-{
-	if (size <= 7)
-		return (1);
-	else if (size > 7 && size <= 11)
-		return (2);
-	else if (size > 11 && size < 17)
-		return (3);
-	else if (size > 16 && size <= 32)
-		return (4);
-	return (0);
-}
-
 int			get_wstrlen(wchar_t *wstr)
 {
 	int		size;
-	int		wlen;
 
-	wlen = 0;
 	size = 0;
 	while (*wstr != '\0')
 	{
-		size = ft_countbits(*wstr);
-		wlen += get_clen(size);
+		size += ft_countbits(*wstr);
 		wstr++;
 	}
-	return (wlen);
+	return (size);
 }

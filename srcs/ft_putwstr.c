@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putwstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbeldame <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 21:12:02 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/06/22 16:13:15 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/22 21:08:03 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ int			ft_putwstr(wchar_t *wstr)
 	len = 0;
 	while (*wstr != '\0')
 	{
-		size = ft_countbits(*wstr);
-		ft_putwchar(*wstr, size);
-		len = (size / 4) + len;
+		size = ft_putwchar(*wstr);
+		len += size;
 		wstr++;
 	}
 	return (len);
@@ -40,7 +39,7 @@ int			get_preciw(wchar_t *wstr, int n)
 	while (n >= clen)
 	{
 		size = ft_countbits(*wstr);
-		clen = get_clen(size);
+		clen = size;
 		n -= clen;
 		wlen += clen;
 		wstr++;
@@ -59,9 +58,8 @@ int			ft_putwnstr(wchar_t *wstr, int n)
 	wlen = 0;
 	while (n >= clen)
 	{
-		size = ft_countbits(*wstr);
-		clen = get_clen(size);
-		ft_putwchar(*wstr, size);
+		size = ft_putwchar(*wstr);
+		clen = size;
 		n -= clen;
 		wlen += clen;
 		wstr++;
