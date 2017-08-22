@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 17:26:47 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/07 20:34:28 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/21 16:27:44 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,19 @@ int				handle_x(va_list argl, t_modif *modi)
 		nb = (unsigned int)nb;
 	base = modi->cap == 1 ? HEXA_CAP : HEXA_MIN;
 	nblen = get_uintlen(nb, base);
-	PLUS = 0;
-	SPACE = 0;
-	DIGIT -= (SHARP && nb > 0) ? 2 : 0;
-	if (period_zero(nb, modi))
+	if (FLAG || PERIOD || PRECI || DIGIT || !MINUS)
 	{
-		ret += apply_digits(modi);
-		return (ret);
+		PLUS = 0;
+		SPACE = 0;
+		DIGIT -= (SHARP && nb > 0) ? 2 : 0;
+		if (period_zero(nb, modi))
+		{
+			ret += apply_digits(modi);
+			return (ret);
+		}
+		ret += handle_flags(modi, nblen, base, nb);
 	}
-	return (handle_flags(modi, nblen, base, nb));
+	return (ret);
 }
 
 uintmax_t		to_unsigned_char_modulo(uintmax_t nbr)

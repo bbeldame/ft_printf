@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 13:47:12 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/19 21:44:02 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/22 20:16:41 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int				parse(va_list argl, const char *format)
 	int					i;
 	int					ret;
 	t_modif				modi;
-	int					tmp;
 
 	i = 0;
 	ret = 0;
@@ -27,17 +26,22 @@ int				parse(va_list argl, const char *format)
 		if (format[i] == '%')
 		{
 			i++;
-			i = parse_flags(argl, format, i, &modi);
-			if (modi.percent == 1)
+			if (format[i] == '\0')
 				return (0);
-			ret += search_format(argl, format[i], &modi);
+			if (ft_strchr("sSpdDioOuUxXcCb?", format[i]))
+			{
+				ret += handle(format[i], argl, &modi);
+			}
+			else
+			{
+				i = parse_flags(argl, format, i, &modi);
+				if (modi.percent == 1)
+					return (0);
+				ret += search_format(argl, format[i], &modi);
+			}
 		}
 		else
-		{
-			tmp = char_before_next_percent(format, i);
-			ret += tmp;
-			i += tmp - 1;
-		}
+			ret += get_charlen(format[i]);
 		i++;
 	}
 	return (ret);
@@ -76,9 +80,7 @@ int				search_format(va_list argl, char l, t_modif *modi)
 
 	ret = 0;
 	if (ft_strchr("sSpdDioOuUxXcCb?", l))
-	{
 		ret = handle(l, argl, modi);
-	}
 	else
 	{
 		ret += handle_bd(modi, l);

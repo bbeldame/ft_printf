@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 19:39:24 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/07 20:56:16 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/21 18:30:20 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,19 @@ int			handle_w(va_list argl, t_modif *modi)
 	value = ulenght_mod(argl, modi);
 	size = ft_countbits(value);
 	nblen = size <= 7 ? 1 : size / 8;
-	width_errors(modi, nblen);
-	if (MINUS)
-		ret += handle_w_minus(modi, value, size);
-	if (DIGIT > 0)
-		ret += apply_digits(modi);
+	if (PRECI || PERIOD || FLAG || DIGIT)
+	{
+		width_errors(modi, nblen);
+		if (MINUS)
+			ret += handle_w_minus(modi, value, size);
+		if (DIGIT > 0)
+			ret += apply_digits(modi);
+	}
 	if (!MINUS)
 	{
-		if (!modi->cap && !modi->mod)
+		if (size <= 7 && !CAP && !MOD)
+			ret += get_charlen(value);
+		else if (!modi->cap && !modi->mod)
 			ret += get_charlen(value);
 		else
 			ret += ft_putwchar(value, size);

@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 17:17:21 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/07 20:36:40 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/21 16:06:48 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,17 @@ int			handle_o(va_list argl, t_modif *modi)
 	nblen = get_uintlen(nb, BASE_8);
 	PLUS = PLUS == 1 ? 0 : 0;
 	SPACE = SPACE == 1 ? 0 : 0;
-	if (SHARP == 1 && nb > 0 && !DIGIT && !PRECI)
-		ret += get_charlen('0');
-	if (period_zero(nb, modi) && !SHARP)
+	if (FLAG || PERIOD || PRECI || DIGIT)
 	{
-		ret += apply_digits(modi);
-		return (ret);
+		if (SHARP == 1 && nb > 0 && !DIGIT && !PRECI)
+			ret += get_charlen('0');
+		if (period_zero(nb, modi) && !SHARP)
+		{
+			ret += apply_digits(modi);
+			return (ret);
+		}
+		ret += o_flags(nb, modi, nblen);
 	}
-	ret += o_flags(nb, modi, nblen);
 	if (!MINUS)
 		ft_putnbr_base(nb, BASE_8);
 	ret += nblen;

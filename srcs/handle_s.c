@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:40:54 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/07 20:40:44 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/21 16:51:30 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ size_t		handle_s(va_list argl, t_modif *modi)
 	ret = 0;
 	str = va_arg(argl, char *);
 	str = str == NULL ? "(null)" : str;
+	if (MOD == 3)
+		return (-1);
 	if (PERIOD || DIGIT)
 		ret += handle_period_or_digit(modi, str);
 	else
