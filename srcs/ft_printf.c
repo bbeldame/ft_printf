@@ -6,49 +6,38 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 13:47:12 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/23 22:15:22 by msakwins         ###   ########.fr       */
-/*   Updated: 2017/08/22 20:53:55 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/08/23 23:44:02 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int				parse(va_list argl, const char *format)
+static int		handle(char c, va_list argl, t_modif *modi)
 {
-	int					i;
-	int					ret;
-	t_modif				modi;
-
-	i = 0;
-	ret = 0;
-	while (format[i])
-	{
-		init_all(&modi);
-		if (format[i] == '%')
-		{
-			i++;
-			if (format[i] == '\0')
-				return (0);
-			if (ft_strchr("sSpdDioOuUxXcCb?", format[i]))
-			{
-				ret += handle(format[i], argl, &modi);
-			}
-			else
-			{
-				i = parse_flags(argl, format, i, &modi);
-				if (modi.percent == 1)
-					return (0);
-				ret += search_format(argl, format[i], &modi);
-			}
-		}
-		else
-			ret += get_charlen(format[i]);
-		i++;
-	}
-	return (ret);
+	if (c == 'D' || c == 'O' || c == 'X' || c == 'U' || c == 'C')
+		modi->cap = 1;
+	if (c == 'd' || c == 'i' || c == 'D')
+		return (handle_d(argl, modi));
+	else if (c == 'o' || c == 'O')
+		return (handle_o(argl, modi));
+	else if (c == 'x' || c == 'X')
+		return (handle_x(argl, modi));
+	else if (c == 'u' || c == 'U')
+		return (handle_u(argl, modi));
+	else if (c == 'p')
+		return (handle_p(argl, modi));
+	else if (c == 'c' || c == 'C')
+		return (handle_w(argl, modi));
+	else if (c == 's' && modi->mod == 0)
+		return (handle_s(argl, modi));
+	else if (c == 'S' || (c == 's' && modi->mod))
+		return (handle_ws(argl, modi));
+	else if (c == 'b')
+		return (handle_b(argl, modi));
+	return (0);
 }
 
-int				parse_flags(va_list argl, const char *format,
+static int		parse_flags(va_list argl, const char *format,
 					int i, t_modif *modi)
 {
 	search_flag(format, i, modi);
@@ -75,43 +64,54 @@ int				parse_flags(va_list argl, const char *format,
 	return (i);
 }
 
-int				search_format(va_list argl, char l, t_modif *modi)
+static int		parse_percent(va_list argl, const char *format,
+	t_modif *modi, int *i)
 {
-	int			ret;
+	int		ret;
 
 	ret = 0;
-	if (ft_strchr("sSpdDioOuUxXcCb?", l))
-		ret = handle(l, argl, modi);
+	if (format[*i] == '\0')
+		return (-1);
+	if (ft_strchr("sSpdDioOuUxXcCb?", format[*i]))
+		ret += handle(format[*i], argl, modi);
 	else
 	{
-		ret += handle_bd(modi, l);
+		*i = parse_flags(argl, format, *i, modi);
+		if (modi->percent == 1)
+			return (-1);
+		if (ft_strchr("sSpdDioOuUxXcCb?", format[*i]))
+			ret += handle(format[*i], argl, modi);
+		else
+			ret += handle_bd(modi, format[*i]);
 	}
 	return (ret);
 }
 
-int				handle(char c, va_list argl, t_modif *modi)
+int				parse(va_list argl, const char *format)
 {
-	if (c == 'D' || c == 'O' || c == 'X' || c == 'U' || c == 'C')
-		modi->cap = 1;
-	if (c == 'd' || c == 'i' || c == 'D')
-		return (handle_d(argl, modi));
-	else if (c == 'o' || c == 'O')
-		return (handle_o(argl, modi));
-	else if (c == 'x' || c == 'X')
-		return (handle_x(argl, modi));
-	else if (c == 'u' || c == 'U')
-		return (handle_u(argl, modi));
-	else if (c == 'p')
-		return (handle_p(argl, modi));
-	else if (c == 'c' || c == 'C')
-		return (handle_w(argl, modi));
-	else if (c == 's' && modi->mod == 0)
-		return (handle_s(argl, modi));
-	else if (c == 'S' || (c == 's' && modi->mod))
-		return (handle_ws(argl, modi));
-	else if (c == 'b')
-		return (handle_b(argl, modi));
-	return (0);
+	int					i;
+	int					ret;
+	t_modif				modi;
+	int					tmp_ret;
+
+	i = 0;
+	ret = 0;
+	while (format[i])
+	{
+		init_all(&modi);
+		if (format[i] == '%')
+		{
+			i++;
+			tmp_ret = parse_percent(argl, format, &modi, &i);
+			if (tmp_ret == -1)
+				return (0);
+			ret += tmp_ret;
+		}
+		else
+			ret += get_charlen(format[i]);
+		i++;
+	}
+	return (ret);
 }
 
 int				ft_printf(const char *format, ...)

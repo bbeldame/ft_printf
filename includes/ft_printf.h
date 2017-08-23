@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/23 22:49:13 by msakwins          #+#    #+#             */
-/*   Updated: 2017/08/23 23:47:16 by msakwins         ###   ########.fr       */
+/*   Created: 2017/02/04 19:54:10 by bbeldame          #+#    #+#             */
+/*   Updated: 2017/08/23 23:50:42 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,6 @@ typedef struct	s_modifiers
 
 int				ft_printf(const char *format, ...);
 int				parse(va_list argl, const char *format);
-int				handle(char c, va_list argl, t_modif *modi);
-int				search_format(va_list argl, char l, t_modif *modi);
-int				parse_flags(va_list argl,
-					const char *format, int i, t_modif *modi);
 void			search_mod(const char *format, int i, t_modif *modi);
 void			search_flag(const char *format, int i, t_modif *modi);
 int				search_digit(va_list argl, const char *format,
