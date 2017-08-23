@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/01 15:46:28 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/23 22:08:25 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/08/23 23:17:49 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ static int		u_flags(uintmax_t nb, t_modif *modi, int nblen)
 	{
 		ret += apply_digits(modi);
 	}
+	if (PRECI > 0 && !MINUS)
+		ret += apply_preci(modi);
 	return (ret);
 }
 
-int			handle_u(va_list argl, t_modif *modi)
+int				handle_u(va_list argl, t_modif *modi)
 {
 	int					ret;
 	uintmax_t			nb;
@@ -39,10 +41,7 @@ int			handle_u(va_list argl, t_modif *modi)
 
 	ret = 0;
 	neg = 0;
-	if (!MOD && !CAP)
-		nb = va_arg(argl, unsigned int);
-	else
-		nb = ulenght_mod(argl, modi);
+	nb = !MOD && !CAP ? va_arg(argl, unsigned) : ulenght_mod(argl, modi);
 	nblen = get_uintlen(nb, BASE_10);
 	PLUS = 0;
 	SPACE = 0;
@@ -51,13 +50,8 @@ int			handle_u(va_list argl, t_modif *modi)
 		if (SHARP == 1 && nb > 0)
 			ret += get_charlen('0');
 		if (period_zero(nb, modi))
-		{
-			ret += apply_digits(modi);
-			return (ret);
-		}
+			return (ret + apply_digits(modi));
 		ret += u_flags(nb, modi, nblen);
-		if (PRECI > 0 && !MINUS)
-			ret += apply_preci(modi);
 	}
 	if (!MINUS)
 		ft_putnbr_base(nb, BASE_10);

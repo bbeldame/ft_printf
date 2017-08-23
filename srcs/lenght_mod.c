@@ -6,28 +6,31 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/05 19:47:02 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/19 18:56:18 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/23 23:47:22 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-intmax_t		lenght_mod(intmax_t nb, t_modif *modi)
+intmax_t		lenght_mod(va_list argl, t_modif *modi)
 {
+	intmax_t		nb;
+
+	nb = va_arg(argl, intmax_t);
 	if (MOD == 1 && !CAP)
-		return ((short int)nb);
+		nb = (short int)nb;
 	else if (MOD == 2 && !CAP)
-		return ((char)nb);
+		nb = (char)nb;
 	else if ((MOD == 3 && !CAP) || (!MOD && CAP == 1))
-		return ((long int)nb);
+		nb = (long int)nb;
 	else if ((MOD == 4 && !CAP) || (MOD == 3 && CAP == 1))
-		return ((long long int)nb);
+		nb = (long long int)nb;
 	else if (MOD == 5 || (MOD == 4 && CAP == 1))
-		return ((intmax_t)nb);
-	else if (modi->mod == 6)
-		return ((long int)nb);
+		nb = (intmax_t)nb;
+	else if (MOD == 6)
+		nb = (long int)nb;
 	else
-		return ((int)nb);
+		nb = (int)nb;
 	return (nb);
 }
 

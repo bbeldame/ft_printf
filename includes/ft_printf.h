@@ -3,11 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msakwins <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/04 19:54:10 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/23 22:16:01 by msakwins         ###   ########.fr       */
-/*   Updated: 2017/08/23 22:13:54 by msakwins         ###   ########.fr       */
+/*   Created: 2017/08/23 22:49:13 by msakwins          #+#    #+#             */
+/*   Updated: 2017/08/23 23:47:16 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +91,7 @@ void			ft_putnstr(const char *s, size_t n);
 int				ft_putwstr(wchar_t *wstr);
 int				ft_putwnstr(wchar_t *wstr, int n);
 int				ft_countbits(wchar_t value);
-intmax_t		lenght_mod(intmax_t nb, t_modif *modi);
+intmax_t		lenght_mod(va_list argl, t_modif *modi);
 uintmax_t		ulenght_mod(va_list argl, t_modif *modi);
 size_t			handle_s(va_list argl, t_modif *modi);
 int				handle_d(va_list argl, t_modif *modi);

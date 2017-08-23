@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 17:17:21 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/23 22:02:33 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/08/23 23:13:24 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int		o_flags(uintmax_t nb, t_modif *modi, int nblen)
 {
-	int		ret;
+	int					ret;
 
 	ret = 0;
 	if (SHARP)
@@ -41,20 +41,17 @@ static int		o_flags(uintmax_t nb, t_modif *modi, int nblen)
 	return (ret);
 }
 
-int			handle_o(va_list argl, t_modif *modi)
+int				handle_o(va_list argl, t_modif *modi)
 {
 	int					ret;
 	uintmax_t			nb;
 	int					nblen;
 
 	ret = 0;
-	if (!MOD && !CAP)
-		nb = va_arg(argl, unsigned int);
-	else
-		nb = ulenght_mod(argl, modi);
+	nb = !MOD && !CAP ? va_arg(argl, unsigned) : ulenght_mod(argl, modi);
 	nblen = get_uintlen(nb, BASE_8);
-	PLUS = PLUS == 1 ? 0 : 0;
-	SPACE = SPACE == 1 ? 0 : 0;
+	PLUS = 0;
+	SPACE = 0;
 	if (FLAG || PERIOD || PRECI || DIGIT)
 	{
 		if (SHARP == 1 && nb > 0 && !DIGIT && !PRECI)

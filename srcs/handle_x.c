@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 17:26:47 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/23 22:02:19 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/08/23 23:25:19 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,15 @@ int				handle_x(va_list argl, t_modif *modi)
 	int					ret;
 	size_t				len;
 	uintmax_t			nb;
-	int					nblen;
 	char				*base;
 
 	ret = 0;
 	len = 0;
-	if (!CAP && !MOD)
-		nb = va_arg(argl, unsigned int);
-	else
-		nb = ulenght_mod(argl, modi);
+	nb = ((!CAP && !MOD) || (CAP && !MOD)) ? va_arg(argl, unsigned int)
+		: ulenght_mod(argl, modi);
 	if (MOD == 2 && CAP == 1)
 		nb = (unsigned char)to_unsigned_char_modulo(nb);
-	if (CAP && !MOD)
-		nb = (unsigned int)nb;
 	base = CAP == 1 ? HEXA_CAP : HEXA_MIN;
-	nblen = get_uintlen(nb, base);
 	if (FLAG || PERIOD || PRECI || DIGIT || !MINUS)
 	{
 		PLUS = 0;
@@ -84,7 +78,7 @@ int				handle_x(va_list argl, t_modif *modi)
 			ret += apply_digits(modi);
 			return (ret);
 		}
-		ret += handle_flags(modi, nblen, base, nb);
+		ret += handle_flags(modi, get_uintlen(nb, base), base, nb);
 	}
 	return (ret);
 }

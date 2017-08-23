@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 19:56:57 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/23 22:13:56 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/08/23 23:13:57 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,14 @@ static int		d_width(t_modif *modi)
 	return (ret);
 }
 
-int			handle_d(va_list argl, t_modif *modi)
+int				handle_d(va_list argl, t_modif *modi)
 {
 	int				ret;
 	intmax_t		nb;
 	int				nblen;
 
 	ret = 0;
-	if (!MOD && !CAP)
-		nb = va_arg(argl, int);
-	else
-	{
-		nb = va_arg(argl, intmax_t);
-		nb = lenght_mod(nb, modi);
-	}
+	nb = !MOD && !CAP ? va_arg(argl, int) : lenght_mod(argl, modi);
 	NEG = nb < 0 ? 1 : 0;
 	nb = NEG == 1 ? -nb : nb;
 	nblen = get_uintlen(nb, BASE_10);
