@@ -6,7 +6,8 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 19:54:10 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/22 21:07:41 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/23 22:16:01 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/08/23 22:13:54 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,14 +96,10 @@ intmax_t		lenght_mod(intmax_t nb, t_modif *modi);
 uintmax_t		ulenght_mod(va_list argl, t_modif *modi);
 size_t			handle_s(va_list argl, t_modif *modi);
 int				handle_d(va_list argl, t_modif *modi);
-int				d_flags(t_modif *modi, intmax_t nb, int nblen);
-int				d_width(t_modif *modi);
 int				handle_x(va_list argl, t_modif *modi);
 int				handle_p(va_list argl, t_modif *modi);
 int				handle_o(va_list argl, t_modif *modi);
-int				o_flags(uintmax_t nb, t_modif *modi, int nblen);
 int				handle_u(va_list argl, t_modif *modi);
-int				u_flags(uintmax_t nb, t_modif *modi, int nblen);
 int				handle_w(va_list argl, t_modif *modi);
 int				handle_ws(va_list argl, t_modif *modi);
 int				handle_bd(t_modif *modi, char c);

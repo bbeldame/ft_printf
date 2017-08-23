@@ -6,41 +6,13 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 17:17:21 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/21 16:06:48 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/08/23 22:02:33 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int			handle_o(va_list argl, t_modif *modi)
-{
-	int					ret;
-	uintmax_t			nb;
-	int					nblen;
-
-	ret = 0;
-	nb = ulenght_mod(argl, modi);
-	nblen = get_uintlen(nb, BASE_8);
-	PLUS = PLUS == 1 ? 0 : 0;
-	SPACE = SPACE == 1 ? 0 : 0;
-	if (FLAG || PERIOD || PRECI || DIGIT)
-	{
-		if (SHARP == 1 && nb > 0 && !DIGIT && !PRECI)
-			ret += get_charlen('0');
-		if (period_zero(nb, modi) && !SHARP)
-		{
-			ret += apply_digits(modi);
-			return (ret);
-		}
-		ret += o_flags(nb, modi, nblen);
-	}
-	if (!MINUS)
-		ft_putnbr_base(nb, BASE_8);
-	ret += nblen;
-	return (ret);
-}
-
-int			o_flags(uintmax_t nb, t_modif *modi, int nblen)
+static int		o_flags(uintmax_t nb, t_modif *modi, int nblen)
 {
 	int		ret;
 
@@ -66,5 +38,36 @@ int			o_flags(uintmax_t nb, t_modif *modi, int nblen)
 	}
 	if (PRECI > 0 && !MINUS)
 		ret += apply_preci(modi);
+	return (ret);
+}
+
+int			handle_o(va_list argl, t_modif *modi)
+{
+	int					ret;
+	uintmax_t			nb;
+	int					nblen;
+
+	ret = 0;
+	if (!MOD && !CAP)
+		nb = va_arg(argl, unsigned int);
+	else
+		nb = ulenght_mod(argl, modi);
+	nblen = get_uintlen(nb, BASE_8);
+	PLUS = PLUS == 1 ? 0 : 0;
+	SPACE = SPACE == 1 ? 0 : 0;
+	if (FLAG || PERIOD || PRECI || DIGIT)
+	{
+		if (SHARP == 1 && nb > 0 && !DIGIT && !PRECI)
+			ret += get_charlen('0');
+		if (period_zero(nb, modi) && !SHARP)
+		{
+			ret += apply_digits(modi);
+			return (ret);
+		}
+		ret += o_flags(nb, modi, nblen);
+	}
+	if (!MINUS)
+		ft_putnbr_base(nb, BASE_8);
+	ret += nblen;
 	return (ret);
 }

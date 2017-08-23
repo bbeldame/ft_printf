@@ -6,43 +6,13 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 19:56:57 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/21 16:54:09 by msakwins         ###   ########.fr       */
+/*   Updated: 2017/08/23 22:13:56 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int			handle_d(va_list argl, t_modif *modi)
-{
-	int				ret;
-	intmax_t		nb;
-	int				nblen;
-
-	ret = 0;
-	nb = va_arg(argl, intmax_t);
-	nb = lenght_mod(nb, modi);
-	NEG = nb < 0 ? 1 : 0;
-	nb = NEG == 1 ? -nb : nb;
-	nblen = get_uintlen(nb, BASE_10);
-	if (PERIOD || FLAG || PRECI || DIGIT)
-	{
-		if (period_zero(nb, modi))
-		{
-			ret += apply_digits(modi);
-			return (ret);
-		}
-		ret += d_flags(modi, nb, nblen);
-		ret += d_width(modi);
-	}
-	if (NEG == 1 && !ZERO && !PRECI && !MINUS)
-		ret += get_charlen('-');
-	if (!MINUS)
-		ft_putnbr_base(nb, BASE_10);
-	ret += nblen;
-	return (ret);
-}
-
-int			d_flags(t_modif *modi, intmax_t nb, int nblen)
+static int		d_flags(t_modif *modi, intmax_t nb, int nblen)
 {
 	int				ret;
 
@@ -61,7 +31,7 @@ int			d_flags(t_modif *modi, intmax_t nb, int nblen)
 	return (ret);
 }
 
-int			d_width(t_modif *modi)
+static int		d_width(t_modif *modi)
 {
 	int				ret;
 	int				negatif;
@@ -82,5 +52,40 @@ int			d_width(t_modif *modi)
 	}
 	if (PRECI > 0 && !MINUS)
 		ret += apply_preci(modi);
+	return (ret);
+}
+
+int			handle_d(va_list argl, t_modif *modi)
+{
+	int				ret;
+	intmax_t		nb;
+	int				nblen;
+
+	ret = 0;
+	if (!MOD && !CAP)
+		nb = va_arg(argl, int);
+	else
+	{
+		nb = va_arg(argl, intmax_t);
+		nb = lenght_mod(nb, modi);
+	}
+	NEG = nb < 0 ? 1 : 0;
+	nb = NEG == 1 ? -nb : nb;
+	nblen = get_uintlen(nb, BASE_10);
+	if (PERIOD || FLAG || PRECI || DIGIT)
+	{
+		if (period_zero(nb, modi))
+		{
+			ret += apply_digits(modi);
+			return (ret);
+		}
+		ret += d_flags(modi, nb, nblen);
+		ret += d_width(modi);
+	}
+	if (NEG == 1 && !ZERO && !PRECI && !MINUS)
+		ret += get_charlen('-');
+	if (!MINUS)
+		ft_putnbr_base(nb, BASE_10);
+	ret += nblen;
 	return (ret);
 }
