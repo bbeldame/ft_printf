@@ -6,13 +6,13 @@
 #    By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/17 19:49:45 by bbeldame          #+#    #+#              #
-#    Updated: 2017/08/19 20:24:46 by bbeldame         ###   ########.fr        #
+#    Updated: 2017/08/24 17:18:58 by msakwins         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
-FLAGS = -Wall -Wextra -Werror -O3
+FLAGS = -Wall -Wextra -Werror
 
 INC = includes
 
@@ -35,7 +35,7 @@ SRC_NAME = search.c \
 	handle_b.c \
 	handle_p.c \
 	handle_u.c \
-	handle_w.c \
+	handle_c.c \
 	ft_countbits.c \
 	lenght_mod.c \
 	handle_mod.c \

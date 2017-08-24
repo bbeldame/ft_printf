@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/10 13:47:12 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/08/23 23:44:02 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/08/24 17:05:14 by msakwins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int		handle(char c, va_list argl, t_modif *modi)
 {
-	if (c == 'D' || c == 'O' || c == 'X' || c == 'U' || c == 'C')
-		modi->cap = 1;
+	if (c == 'D' || c == 'O' || c == 'X' || c == 'U' || c == 'C' || c == 'S')
+		CAP = 1;
 	if (c == 'd' || c == 'i' || c == 'D')
 		return (handle_d(argl, modi));
 	else if (c == 'o' || c == 'O')
@@ -27,11 +27,9 @@ static int		handle(char c, va_list argl, t_modif *modi)
 	else if (c == 'p')
 		return (handle_p(argl, modi));
 	else if (c == 'c' || c == 'C')
-		return (handle_w(argl, modi));
-	else if (c == 's' && modi->mod == 0)
+		return (handle_c(argl, modi));
+	else if (c == 's' || c == 'S')
 		return (handle_s(argl, modi));
-	else if (c == 'S' || (c == 's' && modi->mod))
-		return (handle_ws(argl, modi));
 	else if (c == 'b')
 		return (handle_b(argl, modi));
 	return (0);
